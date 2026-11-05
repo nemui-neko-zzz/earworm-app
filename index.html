@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f6f4ef">
+<title>よしなしおと</title>
+<style>
+:root{color-scheme:light;--bg:#f6f4ef;--paper:#fffefa;--ink:#292923;--muted:#77766e;--line:#e6e2d8;--accent:#657b70;--soft:#dce6df}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif}
+header,main,footer{max-width:780px;margin:auto}header{padding:25px 18px 16px}h1{font-size:27px;letter-spacing:.08em;margin:0}header p,.hint,footer{color:var(--muted);font-size:12px}header p{margin:4px 0}
+main{padding:0 14px 50px}.tabs{display:flex;border-bottom:1px solid var(--line);margin-bottom:16px}.tab{flex:1;border:0;border-bottom:2px solid transparent;background:none;color:var(--muted);padding:12px 4px;font-size:14px}.tab.active{color:var(--ink);border-color:var(--accent);font-weight:700}
+.panel{display:none}.panel.active{display:block}.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:13px}
+h2{font-size:16px;margin:0 0 12px}label{display:block;font-size:12px;color:var(--muted);margin:11px 0 5px}
+input,textarea{width:100%;min-width:0;border:1px solid var(--line);border-radius:9px;padding:11px;background:white;color:var(--ink);font:inherit;font-size:14px;min-height:44px}
+textarea{min-height:88px;resize:vertical}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.grid>div{min-width:0}
+.row{display:flex;gap:8px;align-items:center;min-width:0}.row input{flex:1}
+button{border:0;border-radius:9px;padding:10px 13px;min-height:40px;white-space:nowrap;background:var(--accent);color:white;font-weight:650;font-size:13px;cursor:pointer}button.secondary{background:var(--soft);color:#34473d}button.ghost{background:transparent;border:1px solid var(--line);color:var(--muted)}button.danger{background:#f5e8e5;color:#984b43}button:disabled{opacity:.55}
+#search{flex:0 0 auto;min-width:68px}.result,.record{padding:12px 0;border-bottom:1px solid var(--line)}.result{display:flex;align-items:center;justify-content:space-between;gap:10px}.result strong{display:block}.result small,.record time,.artist{color:var(--muted);font-size:12px}
+.record-top{display:flex;justify-content:space-between;gap:10px}.record-actions{display:flex;gap:5px}.record-actions button{padding:6px 9px;font-size:11px}.record p{white-space:pre-wrap;font-size:13px;margin:6px 0}
+.empty{text-align:center;padding:25px 8px;color:var(--muted);font-size:13px}.metric-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.metric{background:#f4f2ec;padding:12px;border-radius:10px}.metric b{display:block;font-size:23px}.metric span{font-size:11px;color:var(--muted)}
+.bar-row{display:grid;grid-template-columns:minmax(75px,1fr) 2fr 25px;gap:8px;align-items:center;margin:9px 0;font-size:12px}.bar{height:8px;background:#eeece5;border-radius:8px;overflow:hidden}.bar i{display:block;height:100%;background:var(--accent)}
+.notice{background:#f2eee5;padding:11px;border-radius:9px;font-size:12px;color:#686254;margin-bottom:12px}
+footer{padding:0 14px 24px}
+@media(max-width:420px){header{padding-top:20px}.card{padding:13px}.grid{gap:8px}.metric{padding:9px 7px}.metric b{font-size:20px}.record-top{gap:6px}.record-actions{gap:4px}.record-actions button{padding:5px 7px}}
+</style>
+</head>
+<body>
+<header><h1>よしなしおと</h1><p>ふと浮かんだ音を、ひとつずつ。</p></header>
+<main>
+<nav class="tabs"><button class="tab active" data-tab="records">記録</button><button class="tab" data-tab="stats">統計</button><button class="tab" data-tab="analysis">AI分析</button></nav>
+<section id="records" class="panel active">
+<div class="card"><h2>音を記録する</h2>
+<div class="grid"><div><label for="date">日付</label><input id="date" type="date"></div><div><label for="time">時刻（5分刻み）</label><input id="time" type="time" step="300"></div></div>
+<label for="query">曲を検索（MusicBrainz）</label><div class="row"><input id="query" placeholder="曲名・アーティスト名"><button id="search">検索</button></div>
+<p class="hint">検索結果を選ぶか、曲名・アーティストを直接入力してください。</p><div id="results"></div>
+<div class="grid"><div><label for="title">曲名</label><input id="title" placeholder="曲名"></div><div><label for="artist">アーティスト</label><input id="artist" placeholder="アーティスト名"></div></div>
+<label for="memo">コメント（任意）</label><textarea id="memo" placeholder="どこで聴いた？何を思い出した？どんな気分だった？"></textarea>
+<div class="row" style="justify-content:space-between;flex-wrap:wrap;margin-top:12px"><span id="editState" class="hint">記録はこのブラウザ内に保存されます。</span><div class="row"><button id="cancel" class="ghost" hidden>キャンセル</button><button id="save">記録する</button></div></div>
+</div>
+<div class="card"><div class="row" style="justify-content:space-between"><h2 style="margin:0">これまでの記録</h2><span id="count" class="hint">0件</span></div><div id="list" class="empty">まだ記録がありません。</div></div>
+</section>
+<section id="stats" class="panel"><div class="card"><h2>記録のようす</h2><div id="metrics" class="metric-grid"></div></div><div class="card"><h2>よく記録するアーティスト</h2><div id="artists"></div></div><div class="card"><h2>記録した時間帯</h2><div id="hours"></div></div><p class="hint">統計は記録の事実を集計します。好みや心理を断定するものではありません。</p></section>
+<section id="analysis" class="panel"><div class="card"><h2>AIと一緒に振り返る</h2><div class="notice">記録は自動送信されません。生成した文章を確認し、使いたいAIに手動で貼り付けてください。</div>
+<label for="angle">分析の観点（任意）</label><textarea id="angle" placeholder="例：よく浮かぶ曲に共通点はある？昔の記憶と結びついていそう？"></textarea><div class="row" style="flex-wrap:wrap;margin:10px 0"><button id="make">分析用テキストを作る</button><button id="backup" class="secondary">JSONバックアップ</button><label for="restore" style="margin:0;padding:10px 12px;border-radius:9px;background:var(--soft);color:#34473d;font-weight:650;cursor:pointer">読み込み</label><input id="restore" type="file" accept=".json,application/json" hidden></div>
+<label for="output">内容を確認・編集してコピー</label><textarea id="output" style="min-height:200px"></textarea><div class="row"><button id="copy" class="secondary">コピー</button><button id="csv" class="ghost">CSVを書き出す</button></div></div>
+<div class="card"><h2>基本仕様・データについて</h2><p class="hint">保存先：このブラウザのlocalStorage。アカウントやサーバーへの自動同期はありません。曲検索時は検索語をMusicBrainzへ送信します。AI分析は手動コピー方式です。ブラウザのデータ消去で記録が失われるため、定期的にJSONバックアップを保存してください。MusicBrainzにない曲は手入力できます。</p><button id="clear" class="danger">すべての記録を削除</button></div></section>
+</main><footer>よしなしおと · 初期開発版</footer>
+<script>
+const KEY='yoshinashioto_records_v1';let records=read(),editing=null;const $=id=>document.getElementById(id);
+function read(){try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch{return []}}
+function saveData(){localStorage.setItem(KEY,JSON.stringify(records));render()}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function today(){let d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function nowTime(){let d=new Date();d.setMinutes(Math.round(d.getMinutes()/5)*5,0,0);return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')}
+function reset(){editing=null;$('date').value=today();$('time').value=nowTime();$('title').value=$('artist').value=$('memo').value=$('query').value='';$('results').innerHTML='';$('save').textContent='記録する';$('cancel').hidden=true;$('editState').textContent='記録はこのブラウザ内に保存されます。'}
+reset();
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab,.panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');$(b.dataset.tab).classList.add('active');if(b.dataset.tab==='stats')stats()});
+$('search').onclick=async()=>{let q=$('query').value.trim();if(!q)return;let btn=$('search');btn.disabled=true;btn.textContent='検索中';$('results').textContent='';try{let r=await fetch('https://musicbrainz.org/ws/2/recording/?query='+encodeURIComponent(q)+'&fmt=json&limit=8',{headers:{Accept:'application/json'}});if(!r.ok)throw Error();let data=await r.json();if(!data.recordings?.length){$('results').textContent='見つかりませんでした。手入力できます。';return}data.recordings.forEach(hit=>{let artist=(hit['artist-credit']||[]).map(a=>a.name||a.artist?.name).filter(Boolean).join(' / ');let d=document.createElement('div');d.className='result';d.innerHTML='<div><strong>'+esc(hit.title)+'</strong><small>'+esc(artist||'アーティスト不明')+'</small></div><button class="secondary">選択</button>';d.querySelector('button').onclick=()=>{$('title').value=hit.title;$('artist').value=artist;$('results').textContent='曲を選択しました'};$('results').append(d)})}catch{$('results').innerHTML='<p class="hint">アプリ内検索に接続できませんでした。MusicBrainzの検索ページを開くか、手入力してください。</p><button class="secondary" id="external">MusicBrainzで検索</button>';$('external').onclick=()=>window.open('https://musicbrainz.org/search?query='+encodeURIComponent(q)+'&type=recording','_blank','noopener')}finally{btn.disabled=false;btn.textContent='検索'}};
+$('query').onkeydown=e=>{if(e.key==='Enter')$('search').click()};
+$('save').onclick=()=>{let title=$('title').value.trim(),artist=$('artist').value.trim();if(!title&&!artist){alert('曲名かアーティスト名を入力してください');return}let item={id:editing||crypto.randomUUID?.()||String(Date.now()),date:$('date').value||today(),time:$('time').value||nowTime(),title,artist,memo:$('memo').value.trim()};if(editing)records=records.map(x=>x.id===editing?item:x);else records.push(item);records.sort((a,b)=>(b.date+b.time).localeCompare(a.date+a.time));saveData();reset()};
+$('cancel').onclick=reset;
+function render(){$('count').textContent=records.length+'件';let list=$('list');if(!records.length){list.className='empty';list.textContent='まだ記録がありません。';return}list.className='';list.innerHTML=records.map(r=>'<article class="record"><div class="record-top"><div><time>'+esc(r.date)+' '+esc(r.time)+'</time><br><strong>'+esc(r.title||'曲名未入力')+'</strong><div class="artist">'+esc(r.artist||'アーティスト未入力')+'</div></div><div class="record-actions"><button class="ghost" data-edit="'+esc(r.id)+'">編集</button><button class="danger" data-del="'+esc(r.id)+'">削除</button></div></div>'+(r.memo?'<p>'+esc(r.memo)+'</p>':'')+'</article>').join('');list.querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>{let r=records.find(x=>x.id===b.dataset.edit);editing=r.id;$('date').value=r.date;$('time').value=r.time;$('title').value=r.title;$('artist').value=r.artist;$('memo').value=r.memo;$('save').textContent='変更を保存';$('cancel').hidden=false;$('editState').textContent='編集中';window.scrollTo({top:0,behavior:'smooth'})});list.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{if(confirm('この記録を削除しますか？')){records=records.filter(x=>x.id!==b.dataset.del);saveData()}})}
+function bars(id,items){let el=$(id);if(!items.length){el.textContent='データがありません';return}let max=items[0][1]||1;el.innerHTML=items.map(([n,v])=>'<div class="bar-row"><span>'+esc(n)+'</span><div class="bar"><i style="width:'+(v/max*100)+'%"></i></div><b>'+v+'</b></div>').join('')}
+function stats(){let artists=new Set(records.map(x=>x.artist).filter(Boolean)).size,days=new Set(records.map(x=>x.date)).size;$('metrics').innerHTML='<div class="metric"><b>'+records.length+'</b><span>記録数</span></div><div class="metric"><b>'+artists+'</b><span>アーティスト数</span></div><div class="metric"><b>'+days+'</b><span>記録日数</span></div>';let a={};records.forEach(r=>{if(r.artist)a[r.artist]=(a[r.artist]||0)+1});bars('artists',Object.entries(a).sort((x,y)=>y[1]-x[1]).slice(0,8));let h={'朝 5–10時':0,'昼 11–16時':0,'夜 17–21時':0,'深夜 22–4時':0};records.forEach(r=>{let n=Number(r.time.split(':')[0]);h[n>=5&&n<=10?'朝 5–10時':n>=11&&n<=16?'昼 11–16時':n>=17&&n<=21?'夜 17–21時':'深夜 22–4時']++});bars('hours',Object.entries(h))}
+$('make').onclick=()=>{$('output').value='以下は私が記録した音楽ログです。\n\n【分析の観点】\n'+($('angle').value.trim()||'音楽の傾向や記憶・感情とのつながり')+'\n\n記録された事実と推測を分け、少ないデータから性格や心理を断定せず、別の説明可能性も挙げてください。\n\n【記録データ】\n'+JSON.stringify(records.map(({date,time,title,artist,memo})=>({date,time,title,artist,memo})),null,2)};
+function download(name,content,type){let u=URL.createObjectURL(new Blob([content],{type})),a=document.createElement('a');a.href=u;a.download=name;a.click();URL.revokeObjectURL(u)}
+$('backup').onclick=()=>download('yoshinashioto-backup.json',JSON.stringify({version:1,records},null,2),'application/json');
+$('restore').onchange=async e=>{try{let d=JSON.parse(await e.target.files[0].text()),arr=Array.isArray(d)?d:d.records;if(!Array.isArray(arr))throw Error();if(confirm(arr.length+'件を現在の記録に追加しますか？')){let m=new Map(records.map(r=>[r.id,r]));arr.forEach((r,i)=>m.set(r.id||'import-'+Date.now()+'-'+i,r));records=[...m.values()];saveData();alert('読み込みました')}}catch{alert('JSONの読み込みに失敗しました')}e.target.value=''};
+$('copy').onclick=async()=>{try{await navigator.clipboard.writeText($('output').value);alert('コピーしました')}catch{$('output').select();alert('選択してコピーしてください')}};
+$('csv').onclick=()=>{let rows=[['date','time','title','artist','memo'],...records.map(r=>[r.date,r.time,r.title,r.artist,r.memo])];download('yoshinashioto.csv','\ufeff'+rows.map(row=>row.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\r\n'),'text/csv;charset=utf-8')};
+$('clear').onclick=()=>{if(confirm('すべての記録を削除します。元に戻せません。')){records=[];saveData();reset()}};
+render();stats();
+</script></body></html>
