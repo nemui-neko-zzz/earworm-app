@@ -185,8 +185,6 @@ function scheduleSuggestions(kind){
 }
 $('title').addEventListener('input',()=>scheduleSuggestions('title'));
 $('artist').addEventListener('input',()=>scheduleSuggestions('artist'));
-$('title').addEventListener('focus',()=>{if($('title').value.trim().length>=2)scheduleSuggestions('title')});
-$('artist').addEventListener('focus',()=>{if($('artist').value.trim().length>=2)scheduleSuggestions('artist')});
 $('title').addEventListener('keydown',e=>{if(e.key==='Escape')clearSuggestions()});
 $('artist').addEventListener('keydown',e=>{if(e.key==='Escape')clearSuggestions()});
 document.addEventListener('click',e=>{if(!$('results').contains(e.target)&&e.target!==$('title')&&e.target!==$('artist'))clearSuggestions()});
