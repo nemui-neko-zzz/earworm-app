@@ -3,264 +3,88 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta http-equiv="Cache-Control" content="no-cache">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="outfit log">
-<title>outfit log</title>
+<meta name="apple-mobile-web-app-title" content="よしなしおと">
+<meta name="theme-color" content="#f6f4ef">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>よしなしおと</title>
 <style>
+:root{color-scheme:light;--bg:#f6f4ef;--paper:#fffefa;--ink:#292923;--muted:#77766e;--line:#e6e2d8;--accent:#657b70;--soft:#dce6df}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;background:#f4f4f1;color:#222;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans",sans-serif;font-size:16px}
-.top{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:calc(env(safe-area-inset-top,0px) + 32px) 14px 8px}
-.top h1{margin:0;font-size:19px;font-weight:700;white-space:nowrap}
-.top .l{justify-self:start}.top .r{justify-self:end}
-.ibtn{width:36px;height:36px;border-radius:18px;border:1px solid #d8d8d2;background:#fff;font-size:18px;color:#444;padding:0}
-.wrap{padding:6px 14px calc(env(safe-area-inset-bottom,0px) + 84px);max-width:560px;margin:0 auto}
-.card{background:#fff;border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:0 1px 3px rgba(0,0,0,.05)}
-.card h2{margin:0 0 10px;font-size:14px;color:#666;font-weight:600}
-label.f{display:block;font-size:13px;color:#666;margin:10px 0 4px}
-input[type=text],input[type=password],input[type=number],input[type=datetime-local],input[type=date],textarea,input[type=search],select{width:100%;font-size:16px;padding:10px;border:1px solid #d8d8d2;border-radius:10px;background:#fff;color:#222;appearance:none;-webkit-appearance:none;min-width:0;font-family:inherit}
-input[type=datetime-local]{height:50px}
-input[type=date],input[type=text],input[type=number],input[type=password],select{height:46px}
-select{padding-right:30px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23888' stroke-width='2'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
-textarea{min-height:70px;resize:vertical}
-.photo{position:relative;width:100%;aspect-ratio:4/5;max-height:46vh;border:1px dashed #c8c8c0;border-radius:12px;background:#fafaf8;display:flex;align-items:center;justify-content:center;overflow:hidden;color:#888;font-size:15px;text-align:center}
-.photo img{width:100%;height:100%;object-fit:cover;display:block}
-.photo input{position:absolute;inset:0;width:100%;height:100%;opacity:0;font-size:0}
-.photo.sq{aspect-ratio:1/1;max-height:40vh}
-.photo.sq img{object-fit:contain;background:#fff}
-.wx{font-size:15px;line-height:1.6}
-.wx small{color:#888}
-.row{display:flex;gap:8px;align-items:center}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.btn{border:1px solid #d8d8d2;background:#fff;border-radius:10px;padding:10px 12px;font-size:15px;color:#333;white-space:nowrap;flex-shrink:0}
-.btn.sm{padding:6px 10px;font-size:13px}
-.btn.green{background:#2f8f5b;border-color:#2f8f5b;color:#fff;font-weight:600}
-.btn.on{background:#eaf6ef;border-color:#2f8f5b;color:#2f8f5b;font-weight:600}
-.btns{display:flex;gap:10px;margin-top:6px}
-.btns .btn{flex:1;padding:13px}
-.stars{display:flex;gap:6px}
-.stars button{flex:1;height:46px;border:1px solid #d8d8d2;background:#fff;border-radius:10px;font-size:22px;color:#c9c9c2;padding:0}
-.stars button.on{color:#e0a526;border-color:#e8c46c;background:#fffaf0}
-.hint{font-size:12px;color:#888;margin-top:4px;line-height:1.5}
-.res{margin-top:8px}.res button{display:block;width:100%;text-align:left;padding:10px;border:0;border-bottom:1px solid #eee;background:#fff;font-size:15px;color:#222}
-.sync-btn{border:1px solid #d8d8d2;background:#fff;color:#777;border-radius:18px;height:36px;padding:0 12px;font-size:13px;font-weight:700;white-space:nowrap;min-width:76px}
-.sync-btn.on{background:#2f8f5b;border-color:#2f8f5b;color:#fff}
-.tabs{position:fixed;left:0;right:0;bottom:0;display:grid;grid-template-columns:repeat(4,1fr);background:rgba(255,255,255,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid #e4e4de;padding-bottom:env(safe-area-inset-bottom,0px);z-index:5}
-.tabs button{border:0;background:none;padding:14px 0;font-size:14px;color:#888;white-space:nowrap}
-.tabs button.on{color:#2f8f5b;font-weight:700}
-.mon{font-size:13px;color:#666;margin:14px 2px 6px;font-weight:600}
-.item{display:flex;gap:12px;background:#fff;border-radius:14px;padding:10px;margin-bottom:8px;box-shadow:0 1px 3px rgba(0,0,0,.05)}
-.item .th{width:64px;height:84px;border-radius:8px;background:#eee;flex-shrink:0;overflow:hidden}
-.item .th img{width:100%;height:100%;object-fit:cover;display:block}
-.item .tx{min-width:0;flex:1;font-size:14px;line-height:1.5}
-.item .d{font-weight:700;font-size:15px}
-.item .s{color:#e0a526;letter-spacing:1px}
-.item .c{color:#777;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.badge{display:inline-block;font-size:11px;font-weight:700;border-radius:8px;padding:1px 7px;margin-left:6px;vertical-align:1px}
-.badge.ok{background:#eaf6ef;color:#2f8f5b}
-.badge.wait{background:#fff1dc;color:#b86e00}
-.badge.none{background:#eee;color:#888}
-.empty{text-align:center;color:#999;padding:40px 0;font-size:14px}
-.edithead{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:14px;color:#666}
-.back{border:0;background:none;color:#2f8f5b;font-size:16px;font-weight:600;padding:6px 8px 6px 0;white-space:nowrap}
-.edithead .sp{width:52px}
-.chips{display:flex;gap:6px;overflow-x:auto;margin:2px 0 10px;padding-bottom:2px}
-.chips button{border:1px solid #d8d8d2;background:#fff;border-radius:16px;padding:6px 12px;font-size:13px;color:#555;white-space:nowrap;flex-shrink:0}
-.chips button.on{background:#2f8f5b;border-color:#2f8f5b;color:#fff}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
-.tile{background:#fff;border-radius:12px;padding:6px;box-shadow:0 1px 3px rgba(0,0,0,.05);position:relative;border:2px solid transparent}
-.tile.sel{border-color:#2f8f5b}
-.tile .ph{aspect-ratio:1/1;border-radius:8px;background:#f1f1ed;overflow:hidden}
-.tile .ph img{width:100%;height:100%;object-fit:contain;display:block;background:#fff}
-.tile .nm{font-size:12px;margin-top:4px;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.tile .ct{font-size:11px;color:#888}
-.cand{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #f0f0ec}
-.cand:last-child{border-bottom:0}
-.cand .th{width:48px;height:48px;border-radius:8px;background:#f1f1ed;overflow:hidden;flex-shrink:0}
-.cand .th img{width:100%;height:100%;object-fit:contain;background:#fff;display:block}
-.cand .nm{flex:1;min-width:0;font-size:14px;line-height:1.35;overflow:hidden;text-overflow:ellipsis}
-.cand .nm small{display:block;color:#999;font-size:11px}
-.cand .sc{font-size:13px;color:#666;min-width:38px;text-align:right}
-.cand .chk{width:30px;height:30px;border-radius:15px;border:2px solid #d0d0c8;color:transparent;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
-.cand .chk.on{background:#2f8f5b;border-color:#2f8f5b;color:#fff}
-.overlay{position:fixed;inset:0;background:#f4f4f1;z-index:20;overflow:auto;padding:calc(env(safe-area-inset-top,0px) + 32px) 14px calc(env(safe-area-inset-bottom,0px) + 20px)}
-.overlay .head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-.swl{display:flex;flex-wrap:wrap;gap:6px}
-.sw{display:flex;align-items:center;gap:6px;border:1px solid #d8d8d2;background:#fff;border-radius:16px;padding:5px 11px 5px 6px;font-size:13px;color:#333;white-space:nowrap}
-.sw i{width:16px;height:16px;border-radius:8px;border:1px solid rgba(0,0,0,.18);display:block;flex-shrink:0}
-.sw.on{border-color:#2f8f5b;background:#eaf6ef;font-weight:700}
-.sublab{font-size:11px;color:#999;margin:8px 0 4px}
-.sw.nl{padding:5px 13px}
-.toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 80px);transform:translateX(-50%);background:rgba(40,40,40,.88);color:#fff;padding:10px 16px;border-radius:20px;font-size:14px;width:max-content;max-width:min(90vw,420px);z-index:30;opacity:0;pointer-events:none;transition:opacity .2s}
-.toast.show{opacity:1}
-.hide{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;padding-bottom:env(safe-area-inset-bottom);overflow-x:hidden}
+.wrap{max-width:780px;margin:auto}
+/* ヘッダー: 左=更新 / 中央=タイトル / 右=同期 */
+.topbar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;padding:calc(env(safe-area-inset-top,0px) + 32px) 14px 8px}
+.topbar .left{justify-self:start}.topbar .right{justify-self:end}
+.title{text-align:center}
+h1{font-size:22px;letter-spacing:.08em;margin:0;line-height:1.3}
+.sub{color:var(--muted);font-size:11px;margin:0}
+.reload-btn{display:grid;place-items:center;width:40px;height:40px;padding:0;border-radius:50%;background:var(--paper);border:1px solid var(--line);color:var(--muted);transition:transform .45s cubic-bezier(.2,.8,.2,1),color .2s}
+.reload-btn:active{transform:rotate(-180deg);color:var(--accent)}
+.sync-btn{background:var(--paper);border:1px solid var(--line);color:var(--muted);border-radius:20px;padding:9px 15px;min-width:76px}
+.sync-btn.on{background:var(--accent);border-color:var(--accent);color:#fff}
+main{padding:8px 14px 50px}
+.hint,footer{color:var(--muted);font-size:12px}
+.tabs{display:flex;border-bottom:1px solid var(--line);margin-bottom:16px}.tab{flex:1;border:0;border-radius:0;border-bottom:2px solid transparent;background:none;color:var(--muted);padding:12px 4px;font-size:14px;font-weight:400}.tab.active{color:var(--ink);border-color:var(--accent);font-weight:700}
+.panel{display:none}.panel.active{display:block}.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:13px}
+h2{font-size:16px;margin:0 0 12px}label{display:block;font-size:12px;color:var(--muted);margin:11px 0 5px}
+input,textarea{width:100%;min-width:0;border:1px solid var(--line);border-radius:9px;padding:11px;background:white;color:var(--ink);font:inherit;font-size:16px;min-height:44px}
+input[type=date],input[type=time]{-webkit-appearance:none;appearance:none;height:50px;min-width:0}
+textarea{min-height:88px;resize:vertical}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.grid>div{min-width:0}
+.lookup-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.lookup-grid>div{min-width:0}
+.suggestions{max-height:220px;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;border-top:1px solid var(--line);margin-top:8px}
+.suggestions:empty{display:none}.suggestion{display:block;width:100%;min-height:48px;text-align:left;white-space:normal;background:transparent;color:var(--ink);border:0;border-bottom:1px solid var(--line);border-radius:0;padding:9px 5px;font-weight:400}
+.suggestion strong{display:block;font-size:14px}.suggestion small{display:block;color:var(--muted);font-size:12px}
+.time-options{display:flex;align-items:center;gap:8px;margin-top:7px;color:var(--muted);font-size:13px}.time-options input{width:18px;min-height:18px;height:18px;accent-color:var(--accent)}
+@media(max-width:360px){.lookup-grid{gap:6px}.lookup-grid input{padding:9px;font-size:15px}}
+.row{display:flex;gap:8px;align-items:center;min-width:0}.row input{flex:1}
+button{border:0;border-radius:9px;padding:10px 13px;min-height:40px;white-space:nowrap;background:var(--accent);color:white;font-weight:650;font-size:13px;cursor:pointer;font-family:inherit}button.secondary{background:var(--soft);color:#34473d}button.ghost{background:transparent;border:1px solid var(--line);color:var(--muted)}button.danger{background:#f5e8e5;color:#984b43}button:disabled{opacity:.55}
+#search{flex:0 0 auto;min-width:68px}.result,.record{padding:12px 0;border-bottom:1px solid var(--line)}.result{display:flex;align-items:center;justify-content:space-between;gap:10px}.result strong{display:block}.result small,.record time,.artist{color:var(--muted);font-size:12px}
+.record-top{display:flex;justify-content:space-between;gap:10px}.record-actions{display:flex;gap:5px}.record-actions button{padding:6px 9px;font-size:11px}.record p{white-space:pre-wrap;font-size:13px;margin:6px 0}
+.empty{text-align:center;padding:25px 8px;color:var(--muted);font-size:13px}.metric-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.metric{background:#f4f2ec;padding:12px;border-radius:10px}.metric b{display:block;font-size:23px}.metric span{font-size:11px;color:var(--muted)}
+.bar-row{display:grid;grid-template-columns:minmax(75px,1fr) 2fr 25px;gap:8px;align-items:center;margin:9px 0;font-size:12px}.bar{height:8px;background:#eeece5;border-radius:8px;overflow:hidden}.bar i{display:block;height:100%;background:var(--accent)}
+.notice{background:#f2eee5;padding:11px;border-radius:9px;font-size:12px;color:#686254;margin-bottom:12px}
+.toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 28px);transform:translateX(-50%) translateY(20px);opacity:0;background:rgba(41,41,35,.92);color:#fff;font-size:13px;padding:10px 16px;border-radius:20px;width:max-content;max-width:min(90vw,420px);text-align:center;z-index:200;pointer-events:none;transition:.25s}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+footer{padding:0 14px 24px;max-width:780px;margin:auto}
+@media(max-width:420px){.card{padding:13px}.grid{gap:8px}.metric{padding:9px 7px}.metric b{font-size:20px}.record-top{gap:6px}.record-actions{gap:4px}.record-actions button{padding:5px 7px}}
 </style>
 </head>
 <body>
-<div class="top">
-  <div class="l"><button class="ibtn" id="reload" aria-label="更新">&#8635;</button></div>
-  <h1>outfit log</h1>
-  <div class="r"><button class="sync-btn hide" id="syncBtn">同期</button></div>
-</div>
-
 <div class="wrap">
-  <!-- 撮影 -->
-  <section id="tab-shot">
-    <div class="edithead hide" id="editHead"><button class="back" id="editBack">&#8249; 戻る</button><span id="editLabel">記録を編集</span><span class="sp"></span></div>
-    <div class="card">
-      <div class="photo" id="photoBox"><span id="photoHint">タップして写真を撮る / 選ぶ</span><img id="photoImg" class="hide" alt=""><input type="file" id="photoInput" accept="image/*"></div>
-      <label class="f" for="dt">日時</label>
-      <input type="datetime-local" id="dt">
-    </div>
-    <div class="card hide" id="wearCard">
-      <h2>着ていた服 <span id="wearState" class="badge none"></span></h2>
-      <div id="wearList"></div>
-      <div class="hint" id="wearHint"></div>
-      <div class="btns" style="margin-top:10px">
-        <button class="btn" id="aiBtn">AI判定</button>
-        <button class="btn" id="addItemBtn">服を追加</button>
-      </div>
-      <button class="btn" id="confirmBtn" style="width:100%;margin-top:10px;padding:13px">着た服を確定する</button>
-    </div>
-    <div class="card">
-      <h2>天気と気温</h2>
-      <div class="row" style="justify-content:space-between;margin-bottom:6px">
-        <div id="locName" style="font-size:15px"></div>
-        <button class="btn sm" id="locToggle">今日だけ変える</button>
-      </div>
-      <div id="locPanel" class="hide">
-        <input type="search" id="locQ" placeholder="地名で探す(例: 鳥取)">
-        <div class="res" id="locRes"></div>
-        <button class="btn sm" id="locBase" style="margin-top:8px">基本の地点に戻す</button>
-      </div>
-      <div class="wx" id="wx">&nbsp;</div>
-      <button class="btn sm" id="wxRetry" style="margin-top:6px">取得し直す</button>
-    </div>
-    <div class="card">
-      <h2>お気に入り度</h2>
-      <div class="stars" id="stars"></div>
-      <div class="hint">あとからでも入れられます。もう一度タップすると外れます。</div>
-      <label class="f" for="cm">メモ</label>
-      <textarea id="cm" placeholder="例: 色は好きだけど、パンツが少しきつい"></textarea>
-    </div>
-    <div class="btns">
-      <button class="btn hide" id="delBtn">削除</button>
-      <button class="btn green" id="saveBtn">保存</button>
-    </div>
-  </section>
-
-  <!-- 履歴 -->
-  <section id="tab-hist" class="hide">
-    <div class="chips" id="hChips">
-      <button data-f="all" class="on">すべて</button>
-      <button data-f="pending">確認待ち <span id="pn"></span></button>
-    </div>
-    <div class="hint" id="hHint" style="margin:-4px 2px 10px"></div>
-    <div id="histList"></div>
-  </section>
-
-  <!-- ワードローブ -->
-  <section id="tab-ward" class="hide">
-    <div id="wListView">
-      <div class="row" style="justify-content:space-between;margin-bottom:8px">
-        <div id="wCount" style="font-size:14px;color:#666"></div>
-        <button class="btn green sm" id="wAdd">＋ 服を登録</button>
-      </div>
-      <div class="chips" id="wChips"></div>
-      <div class="grid" id="wGrid"></div>
-    </div>
-    <div id="wFormView" class="hide">
-      <div class="edithead"><button class="back" id="wBack">&#8249; 戻る</button><span id="wFormLabel">服を登録</span><span class="sp"></span></div>
-      <div class="card">
-        <div class="photo sq" id="wPhotoBox"><span id="wPhotoHint">タップして服の写真を撮る / 選ぶ<br><small>ハンガーにかけて、正面から撮ると見分けやすいです</small></span><img id="wPhotoImg" class="hide" alt=""><input type="file" id="wPhotoInput" accept="image/*"></div>
-        <div class="row" style="margin-top:8px;flex-wrap:wrap" id="bgRow">
-          <button class="btn sm hide" id="bgRun">背景をきれいにする</button>
-          <button class="btn sm hide" id="bgCancel">やめる</button>
-          <button class="btn sm green hide" id="bgApply">これにする</button>
-          <button class="btn sm hide" id="bgUndo">元の写真に戻す</button>
-        </div>
-        <div class="hint" id="bgMsg"></div>
-        <label class="f" for="wName">名前</label>
-        <input type="text" id="wName" placeholder="例: ネイビーのカーディガン">
-        <label class="f" for="wCat">カテゴリ</label>
-        <select id="wCat"></select>
-        <div id="wLenBox" class="hide"><label class="f">袖・丈 <small style="color:#999">(気温の分析に使います)</small></label><div class="swl" id="wLen"></div></div>
-        <label class="f">色</label>
-        <div id="wSugBox" class="hide"><div class="sublab">写真から見つけた色</div><div class="swl" id="wSug"></div><div class="sublab">すべての色</div></div>
-        <div class="swl" id="wSw"></div>
-        <input type="text" id="wColor" class="hide" placeholder="色の名前を入れる(例: 薄いピンク)" style="margin-top:8px">
-        <label class="f" for="wBrand">ブランド(任意)</label>
-        <input type="text" id="wBrand" list="brandList" autocomplete="off">
-        <datalist id="brandList"></datalist>
-        <div class="swl" id="wBrandChips" style="margin-top:8px"></div>
-        <button class="btn sm" id="wFind" style="margin-top:10px">ブランドの公式サイトで探す</button>
-        <div class="hint">見つけた公式画像は、ページで長押し→「写真に追加」。戻って上の写真欄から選ぶと使えます。</div>
-        <div class="two">
-          <div><label class="f" for="wPrice">購入価格(円)</label><input type="number" inputmode="numeric" id="wPrice" placeholder="例: 5900"></div>
-          <div><label class="f" for="wBought">購入日</label><input type="date" id="wBought"></div>
-        </div>
-        <label class="f" for="wSold">売却額(円・手放したときだけ)</label>
-        <input type="number" inputmode="numeric" id="wSold">
-        <div class="hint" id="wStats"></div>
-      </div>
-      <div class="btns">
-        <button class="btn hide" id="wDel">削除</button>
-        <button class="btn hide" id="wSaveNext">保存して次へ</button>
-        <button class="btn green" id="wSave">保存</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- 設定 -->
-  <section id="tab-set" class="hide">
-    <div class="card">
-      <h2>基本の天気の地点</h2>
-      <div id="baseName" style="font-size:15px;margin-bottom:8px"></div>
-      <input type="search" id="baseQ" placeholder="地名で探す(例: 御殿場)">
-      <div class="res" id="baseRes"></div>
-      <div class="hint">撮影のたびにこの地点が選ばれます。旅行など、その日だけ変えたいときは撮影画面から変えられます。</div>
-    </div>
-    <div class="card">
-      <h2>AI判定(Gemini)</h2>
-      <div id="keyState" style="font-size:15px;margin-bottom:4px"></div>
-      <div id="aiCount" style="font-size:14px;color:#555;margin-bottom:2px"></div>
-      <div class="hint" style="margin:0 0 8px">1回の判定=1リクエストで数えています。上限は <a href="https://aistudio.google.com/rate-limit" target="_blank" rel="noopener">AI Studio</a> で確認できます。</div>
-      <label class="f" for="gkey">APIキー</label>
-      <input type="password" id="gkey" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="ここに貼り付け">
-      <label class="f" for="gmodel">モデル名</label>
-      <input type="text" id="gmodel" autocapitalize="off" spellcheck="false">
-      <div class="btns">
-        <button class="btn" id="gClear">キーを消す</button>
-        <button class="btn green" id="gSave">保存</button>
-      </div>
-      <div class="hint">キーはこのiPhoneの中だけに保存します。同期にも、バックアップのファイルにも、GitHubにも入りません。機種変更のときは貼り直してください。</div>
-    </div>
-    <div class="card">
-      <h2>バックアップ</h2>
-      <div class="btns" style="margin-top:0">
-        <button class="btn" id="exportBtn">書き出す</button>
-        <button class="btn" id="importBtn">読み込む</button>
-      </div>
-      <input type="file" id="importFile" accept="application/json" class="hide">
-      <div class="hint" id="stat"></div>
-      <div class="hint">写真もファイルに入ります。機種変更や、ブラウザのデータが消えたときの控えになります。</div>
-    </div>
-  </section>
+<div class="topbar">
+  <div class="left"><button id="reloadBtn" class="reload-btn" title="最新に更新" aria-label="最新に更新">
+    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>
+  </button></div>
+  <div class="title"><h1>よしなしおと</h1><p class="sub">ふと浮かんだ音を、ひとつずつ。</p></div>
+  <div class="right"><button id="syncBtn" class="sync-btn" style="display:none">同期</button></div>
 </div>
-
-<!-- 服の選択 -->
-<div class="overlay hide" id="picker">
-  <div class="head"><b>着た服を選ぶ</b><button class="btn green sm" id="pickDone">完了</button></div>
-  <div class="chips" id="pickChips"></div>
-  <div class="grid" id="pickGrid"></div>
+<main>
+<nav class="tabs"><button class="tab active" data-tab="records">記録</button><button class="tab" data-tab="stats">統計</button><button class="tab" data-tab="analysis">AI分析</button></nav>
+<section id="records" class="panel active">
+<div class="card"><h2>音を記録する</h2>
+<label for="date">日付</label><input id="date" type="date">
+<div class="row" style="gap:12px;align-items:center;margin-top:7px"><label class="time-options" style="margin:0"><input id="hasTime" type="checkbox" checked>時刻も記録する</label><input id="time" type="time" style="max-width:150px;min-height:38px;height:40px;padding:6px 9px"></div>
+<label>曲名・アーティスト名（入力すると候補が表示されます）</label>
+<div class="lookup-grid"><div><input id="title" placeholder="曲名" autocomplete="off"></div><div><input id="artist" placeholder="アーティスト名" autocomplete="off"></div></div>
+<div id="results" class="suggestions" role="listbox" aria-label="検索候補"></div>
+<p class="hint">候補を選ぶと入力欄に反映されます。見つからない場合はそのまま手入力できます。</p>
+<label for="memo">コメント（任意）</label><textarea id="memo" placeholder="どこで聴いた？何を思い出した？どんな気分だった？"></textarea>
+<div class="row" style="justify-content:space-between;flex-wrap:wrap;margin-top:12px"><span id="editState" class="hint"></span><div class="row"><button id="cancel" class="ghost" hidden>キャンセル</button><button id="save">記録する</button></div></div>
 </div>
-
-<nav class="tabs">
-  <button data-t="shot" class="on">撮影</button>
-  <button data-t="hist">履歴</button>
-  <button data-t="ward">ワードローブ</button>
-  <button data-t="set">設定</button>
-</nav>
+<div class="card"><div class="row" style="justify-content:space-between"><h2 style="margin:0">これまでの記録</h2><span id="count" class="hint">0件</span></div><div id="list" class="empty">まだ記録がありません。</div></div>
+</section>
+<section id="stats" class="panel"><div class="card"><h2>記録のようす</h2><div id="metrics" class="metric-grid"></div></div><div class="card"><h2>よく記録するアーティスト</h2><div id="artists"></div></div><div class="card"><h2>記録した時間帯</h2><div id="hours"></div></div><div class="card"><h2>思い浮かんだきっかけ</h2><p class="hint" id="kikkakeNote"></p><div id="kikkake"></div><p class="hint">メモの言葉で自動判定した簡易の分類です。1件が複数に入ることがあり、言葉が足りないと「その他」になります。</p></div><div class="card"><h2>曜日・月</h2><div id="weekdays"></div><div style="height:10px"></div><div id="months"></div></div><div class="card"><h2>もう一度浮かんだ曲</h2><div id="repeats"></div></div><p class="hint">統計は記録の事実を集計します。好みや心理を断定するものではありません。</p></section>
+<section id="analysis" class="panel"><div class="card"><h2>AIと一緒に振り返る</h2><div class="notice">記録は自動送信されません。「コピー」を押すと分析用の文章がクリップボードに入るので、使いたいAIに手動で貼り付けてください。</div>
+<div class="row" style="flex-wrap:wrap;margin:10px 0"><button id="make">分析用テキストをコピー</button><button id="backup" class="secondary">JSONバックアップ</button><label for="restore" style="margin:0;padding:10px 12px;border-radius:9px;background:var(--soft);color:#34473d;font-weight:650;font-size:13px;cursor:pointer">読み込み</label><input id="restore" type="file" accept=".json,application/json" hidden></div>
+<div class="row"><button id="csv" class="ghost">CSVを書き出す</button></div></div>
+<div class="card"><h2>基本仕様・データについて</h2><p class="hint">保存先：このブラウザのlocalStorage。右上の「同期」でGoogleログインすると、同じアカウントの端末間でクラウド(Firebase)にも保存されます。曲検索時は検索語をMusicBrainzへ送信します。AI分析は手動コピー方式です。同期していても、消した記録はクラウドからも消えるため、ときどきJSONバックアップを保存してください。MusicBrainzにない曲は手入力できます。</p></div></section>
+</main>
+<footer>よしなしおと · 初期開発版</footer>
+</div>
 <div class="toast" id="toast"></div>
 
 <!-- Firebase (同期用。読み込めない時はローカルのみで動作) -->
@@ -268,1068 +92,299 @@ textarea{min-height:70px;resize:vertical}
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 <script>
-(function(){
-"use strict";
-var LS='outfit-log-v1';
-var KEYLS='outfit-log-gkey',MODELLS='outfit-log-gmodel',DEFMODEL='gemini-flash-latest';
-var WD=['日','月','火','水','木','金','土'];
-var WXN={0:'快晴',1:'晴れ',2:'薄曇り',3:'曇り',45:'霧',48:'霧',51:'霧雨',53:'霧雨',55:'霧雨',56:'霧雨',57:'霧雨',61:'雨',63:'雨',65:'強い雨',66:'雨',67:'雨',71:'雪',73:'雪',75:'大雪',77:'雪',80:'にわか雨',81:'にわか雨',82:'強いにわか雨',85:'にわか雪',86:'にわか雪',95:'雷雨',96:'雷雨',99:'雷雨'};
-var CATS=['トップス','ボトムス','アウター','ワンピース','インナー','靴下・タイツ','靴','バッグ','小物','その他'];
-// 袖・丈(気温との関係を見るため)。カテゴリごとに選べるものが違う
-var LEN_BY_CAT={'トップス':['長袖','半袖','ノースリーブ'],'アウター':['長袖','半袖','ノースリーブ'],'ワンピース':['長袖','半袖','ノースリーブ'],'インナー':['長袖','半袖','ノースリーブ'],'ボトムス':['長め','短め']};
-function lenOptions(cat){return LEN_BY_CAT[cat]||[]}
-var SEL_SCORE=70; // この確信度以上は、最初からチェックしておく
-var $=function(id){return document.getElementById(id)};
+const KEY_V1='yoshinashioto_records_v1';   // 旧: 記録の配列のみ
+const KEY='yoshinashioto_state_v2';        // 新: {records, updatedAt}
+const $=id=>document.getElementById(id);
+let editing=null;
 
-/* ---------- 保存 ---------- */
-var db={settings:{base:null},settingsAt:0,records:[],tombs:{},wardrobe:[],wtombs:{}};
+/* ===== データ ===== */
+function normalize(s){
+  const arr=Array.isArray(s&&s.records)?s.records:[];
+  const records=arr.filter(r=>r&&typeof r==='object').map((r,i)=>({
+    id:String(r.id||('r-'+Date.now()+'-'+i)),
+    date:String(r.date||''),time:String(r.time||''),
+    title:String(r.title||''),artist:String(r.artist||''),memo:String(r.memo||'')
+  }));
+  sortRecords(records);
+  return {records,updatedAt:Number(s&&s.updatedAt)||0};
+}
+function sortRecords(a){a.sort((x,y)=>(y.date+y.time).localeCompare(x.date+x.time))}
 function load(){
-  try{var s=JSON.parse(localStorage.getItem(LS)||'null');if(s){db.settings=s.settings||{base:null};db.settingsAt=s.settingsAt||0;db.records=Array.isArray(s.records)?s.records:[];db.tombs=s.tombs||{};db.wardrobe=Array.isArray(s.wardrobe)?s.wardrobe:[];db.wtombs=s.wtombs||{};}}catch(e){}
-  if(!db.settings||typeof db.settings!=='object')db.settings={base:null};
+  try{
+    const v2=localStorage.getItem(KEY);
+    if(v2)return normalize(JSON.parse(v2));
+    const v1=localStorage.getItem(KEY_V1);   // 旧データを引き継ぐ(更新時刻0=クラウドの本物を上書きしない)
+    if(v1)return normalize({records:JSON.parse(v1),updatedAt:0});
+  }catch{}
+  return {records:[],updatedAt:0};
 }
-function save(){localStorage.setItem(LS,JSON.stringify(db))}
-
-var idbP=null;
-function idb(){
-  if(idbP)return idbP;
-  idbP=new Promise(function(res,rej){
-    var r=indexedDB.open('outfit-log',2);
-    r.onupgradeneeded=function(){
-      var d=r.result;
-      if(!d.objectStoreNames.contains('photos'))d.createObjectStore('photos');
-      if(!d.objectStoreNames.contains('wphotos'))d.createObjectStore('wphotos');
-    };
-    r.onsuccess=function(){res(r.result)};r.onerror=function(){rej(r.error)};
-  });
-  return idbP;
+let state=load();
+function save(){                 // 変更のたびに呼ぶ
+  state.updatedAt=Date.now();
+  localStorage.setItem(KEY,JSON.stringify(state));
+  render();if(syncReady)pushToCloud();
 }
-function photoPut(id,blob,st){st=st||'photos';return idb().then(function(d){return new Promise(function(res,rej){var t=d.transaction(st,'readwrite');t.objectStore(st).put(blob,id);t.oncomplete=res;t.onerror=function(){rej(t.error)}})})}
-function photoGet(id,st){st=st||'photos';return idb().then(function(d){return new Promise(function(res,rej){var q=d.transaction(st).objectStore(st).get(id);q.onsuccess=function(){res(q.result||null)};q.onerror=function(){rej(q.error)}})})}
-function photoDel(id,st){st=st||'photos';return idb().then(function(d){return new Promise(function(res){var t=d.transaction(st,'readwrite');t.objectStore(st).delete(id);t.oncomplete=res;t.onerror=res})})}
 
-/* ---------- 小道具 ---------- */
-function pad(n){return n<10?'0'+n:''+n}
-function dtValue(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())+'T'+pad(d.getHours())+':'+pad(d.getMinutes())}
-function parseDt(v){var m=/^(\d{4})-(\d\d)-(\d\d)T(\d\d):(\d\d)/.exec(v||'');return m?{y:+m[1],mo:+m[2],d:+m[3],h:+m[4],mi:+m[5]}:null}
-function dateKey(v){return String(v||'').slice(0,10)}
-function wdOf(key){var p=key.split('-');return WD[new Date(+p[0],+p[1]-1,+p[2]).getDay()]}
-function jpDate(key){var p=key.split('-');return (+p[0])+'年'+(+p[1])+'月'+(+p[2])+'日('+wdOf(key)+')'}
-function uid(pre){return (pre||'o')+Date.now().toString(36)+Math.random().toString(36).slice(2,6)}
-function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
-var toastT=null;
-function toast(m){var t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove('show')},2600)}
-function stars(n){var s='';for(var i=1;i<=5;i++)s+=i<=n?'★':'☆';return s}
-function yen(n){return '¥'+Math.round(n).toLocaleString('ja-JP')}
-function numOrNull(v){if(v===''||v==null)return null;var n=Number(v);return isFinite(n)?n:null}
-
-/* ---------- 写真の縮小 ---------- */
-function shrink(file,MAX,Q){
-  MAX=MAX||1280;Q=Q||0.8;
-  function draw(src,w,h){
-    var k=Math.min(1,MAX/Math.max(w,h));var c=document.createElement('canvas');
-    c.width=Math.round(w*k);c.height=Math.round(h*k);
-    c.getContext('2d').drawImage(src,0,0,c.width,c.height);
-    return new Promise(function(res,rej){c.toBlob(function(b){b?res(b):rej(new Error('blob'))},'image/jpeg',Q)});
+/* ===== 画面の小物 ===== */
+let toastTimer=null;
+function showToast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),1800)}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function p2(n){return String(n).padStart(2,'0')}
+function today(){const d=new Date();return d.getFullYear()+'-'+p2(d.getMonth()+1)+'-'+p2(d.getDate())}   // 端末のローカル日付
+function nowTime(){const d=new Date();d.setMinutes(Math.round(d.getMinutes()/5)*5,0,0);return p2(d.getHours())+':'+p2(d.getMinutes())}
+function nowLocal(){return today()+'T'+nowTime()}
+function reset(){editing=null;$('date').value=today();$('time').value=nowTime();$('hasTime').checked=true;$('time').disabled=false;$('title').value=$('artist').value=$('memo').value='';$('results').innerHTML='';$('save').textContent='記録する';$('cancel').hidden=true;$('editState').textContent=''}
+$('hasTime').onchange=()=>{
+  if($('hasTime').checked){
+    const d=new Date();
+    $('time').value=p2(d.getHours())+':'+p2(d.getMinutes());
+    $('time').disabled=false;
+  }else{
+    $('time').value='';
+    $('time').disabled=true;
   }
-  if(window.createImageBitmap){
-    return createImageBitmap(file,{imageOrientation:'from-image'}).then(function(bm){return draw(bm,bm.width,bm.height)});
-  }
-  return new Promise(function(res,rej){
-    var u=URL.createObjectURL(file),im=new Image();
-    im.onload=function(){draw(im,im.naturalWidth,im.naturalHeight).then(function(b){URL.revokeObjectURL(u);res(b)},rej)};
-    im.onerror=rej;im.src=u;
-  });
-}
-function blobToDataUrl(b){return new Promise(function(res){var r=new FileReader();r.onload=function(){res(r.result)};r.readAsDataURL(b)})}
-
-/* ---------- 天気(Open-Meteo) ---------- */
-function fetchWeather(loc,dtv){
-  var p=parseDt(dtv);if(!p||!loc)return Promise.reject(new Error('no'));
-  var key=p.y+'-'+pad(p.mo)+'-'+pad(p.d);
-  var days=(Date.now()-new Date(p.y,p.mo-1,p.d).getTime())/86400000;
-  var base=days>80?'https://archive-api.open-meteo.com/v1/archive':'https://api.open-meteo.com/v1/forecast';
-  var url=base+'?latitude='+loc.lat+'&longitude='+loc.lon+'&hourly=temperature_2m&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto&start_date='+key+'&end_date='+key;
-  return fetch(url).then(function(r){if(!r.ok)throw new Error('http');return r.json()}).then(function(j){
-    var dd=j.daily||{},hh=j.hourly||{};
-    var tn=(hh.temperature_2m&&hh.temperature_2m[p.h]!=null)?hh.temperature_2m[p.h]:null;
-    return {code:dd.weather_code?dd.weather_code[0]:null,tmax:dd.temperature_2m_max?dd.temperature_2m_max[0]:null,tmin:dd.temperature_2m_min?dd.temperature_2m_min[0]:null,tnow:tn,loc:{name:loc.name,lat:loc.lat,lon:loc.lon},fetchedAt:Date.now()};
-  });
-}
-function geoSearch(q){
-  var url='https://geocoding-api.open-meteo.com/v1/search?name='+encodeURIComponent(q)+'&count=6&language=ja&format=json';
-  return fetch(url).then(function(r){return r.json()}).then(function(j){
-    return (j.results||[]).map(function(x){return {name:x.name+(x.admin1&&x.admin1!==x.name?'('+x.admin1+')':''),lat:x.latitude,lon:x.longitude}});
-  });
-}
-function wxText(w){
-  if(!w)return '';
-  var t=[];
-  if(w.code!=null)t.push((WXN[w.code]||'天気不明'));
-  var a=[];
-  if(w.tmax!=null)a.push('最高 '+Math.round(w.tmax)+'°');
-  if(w.tmin!=null)a.push('最低 '+Math.round(w.tmin)+'°');
-  if(w.tnow!=null)a.push('撮影時 '+Math.round(w.tnow)+'°');
-  return t.join('')+(a.length?'<br><small>'+a.join(' / ')+'</small>':'');
-}
-function shortWx(w){
-  if(!w)return '';
-  var s=(w.code!=null?(WXN[w.code]||''):'');
-  if(w.tmax!=null&&w.tmin!=null)s+=' '+Math.round(w.tmin)+'〜'+Math.round(w.tmax)+'°';
-  else if(w.tnow!=null)s+=' '+Math.round(w.tnow)+'°';
-  return s.trim();
-}
-
-/* ---------- 地点の検索部品 ---------- */
-function locSearch(inp,resEl,onPick){
-  var timer=null,seq=0;
-  inp.addEventListener('input',function(){
-    clearTimeout(timer);var q=inp.value.trim();
-    if(!q){resEl.innerHTML='';return}
-    timer=setTimeout(function(){
-      var my=++seq;
-      geoSearch(q).then(function(list){
-        if(my!==seq)return;
-        if(!list.length){resEl.innerHTML='<div class="hint">見つかりませんでした</div>';return}
-        resEl.innerHTML='';
-        list.forEach(function(x){
-          var b=document.createElement('button');b.type='button';b.textContent=x.name;
-          b.addEventListener('click',function(){onPick(x);inp.value='';resEl.innerHTML=''});
-          resEl.appendChild(b);
-        });
-      }).catch(function(){resEl.innerHTML='<div class="hint">検索できませんでした(通信を確認)</div>'});
-    },350);
-  });
-}
-
-/* ---------- 画像のキャッシュ(表示用URL) ---------- */
-var urlCache={},wurl={};
-function loadImg(im,id,st){
-  var cache=st==='wphotos'?wurl:urlCache;
-  if(cache[id]){im.src=cache[id];return}
-  photoGet(id,st).then(function(b){if(b){cache[id]=URL.createObjectURL(b);im.src=cache[id]}});
-}
-function wById(id){return db.wardrobe.find(function(w){return w.id===id})||null}
-function wIdx(id){return db.wardrobe.findIndex(function(w){return w.id===id})}
-function wearCounts(){
-  var m={};
-  db.records.forEach(function(r){if(r.confirmed&&r.items)r.items.forEach(function(id){m[id]=(m[id]||0)+1})});
-  return m;
-}
-
-/* ---------- 撮影フォーム ---------- */
-var cur=null; // 今のフォームの状態
-function newCur(){
-  return {id:null,photoAt:0,photoBlob:null,photoUrl:null,dt:dtValue(new Date()),fav:0,comment:'',loc:db.settings.base?{name:db.settings.base.name,lat:db.settings.base.lat,lon:db.settings.base.lon}:null,locIsBase:true,weather:null,wxBusy:false,cands:[],sel:[],confirmed:false,ai:null};
-}
-function setPhotoUrl(u){
-  if(cur.photoUrl&&cur.photoUrl.indexOf('blob:')===0)URL.revokeObjectURL(cur.photoUrl);
-  cur.photoUrl=u;
-  var im=$('photoImg');
-  if(u){im.src=u;im.classList.remove('hide');$('photoHint').classList.add('hide')}
-  else{im.removeAttribute('src');im.classList.add('hide');$('photoHint').classList.remove('hide')}
-}
-function renderForm(){
-  $('dt').value=cur.dt;
-  $('cm').value=cur.comment;
-  renderStars();
-  renderLoc();
-  renderWx();
-  var edit=!!cur.id;
-  $('editHead').classList.toggle('hide',!edit);
-  $('delBtn').classList.toggle('hide',!edit);
-  $('locPanel').classList.add('hide');
-  $('locToggle').textContent=edit?'地点を変える':'今日だけ変える';
-  renderWear();
-}
-function renderStars(){
-  var h='';for(var i=1;i<=5;i++)h+='<button type="button" data-n="'+i+'" class="'+(i<=cur.fav?'on':'')+'" aria-label="'+i+'">★</button>';
-  $('stars').innerHTML=h;
-}
-function renderLoc(){
-  var l=cur.loc;
-  $('locName').innerHTML=l?esc(l.name)+(cur.locIsBase&&!cur.id?' <small style="color:#888">(基本)</small>':''):'<span style="color:#c0392b">地点が未設定です(設定で決めるか、下で探す)</span>';
-}
-function renderWx(){
-  var el=$('wx');
-  if(cur.wxBusy){el.innerHTML='<small>取得中...</small>';return}
-  if(cur.weather){el.innerHTML=wxText(cur.weather);return}
-  el.innerHTML='<small>'+(cur.loc?'まだ取得していません':'地点を決めると自動で取得します')+'</small>';
-}
-var wxSeq=0;
-function refreshWx(){
-  if(!cur.loc||!parseDt(cur.dt)){cur.weather=null;renderWx();return}
-  var my=++wxSeq;cur.wxBusy=true;renderWx();
-  fetchWeather(cur.loc,cur.dt).then(function(w){
-    if(my!==wxSeq)return;cur.weather=w;cur.wxBusy=false;renderWx();
-  }).catch(function(){
-    if(my!==wxSeq)return;cur.wxBusy=false;cur.weather=null;
-    $('wx').innerHTML='<small>取得できませんでした(通信を確認して「取得し直す」)</small>';
-  });
-}
-
-$('photoInput').addEventListener('change',function(e){
-  var f=e.target.files&&e.target.files[0];if(!f)return;
-  shrink(f).then(function(b){cur.photoBlob=b;setPhotoUrl(URL.createObjectURL(b))}).catch(function(){toast('写真を読み込めませんでした')});
-  e.target.value='';
-});
-$('dt').addEventListener('change',function(){cur.dt=$('dt').value;refreshWx()});
-$('cm').addEventListener('input',function(){cur.comment=$('cm').value});
-$('stars').addEventListener('click',function(e){
-  var b=e.target.closest('button');if(!b)return;
-  var n=+b.getAttribute('data-n');cur.fav=(cur.fav===n)?0:n;renderStars();
-});
-$('wxRetry').addEventListener('click',refreshWx);
-$('locToggle').addEventListener('click',function(){$('locPanel').classList.toggle('hide')});
-locSearch($('locQ'),$('locRes'),function(x){
-  cur.loc=x;cur.locIsBase=false;$('locPanel').classList.add('hide');renderLoc();refreshWx();
-});
-$('locBase').addEventListener('click',function(){
-  var b=db.settings.base;
-  cur.loc=b?{name:b.name,lat:b.lat,lon:b.lon}:null;cur.locIsBase=true;
-  $('locPanel').classList.add('hide');renderLoc();refreshWx();
-});
-
-function resetForm(){cur=newCur();setPhotoUrl(null);renderForm();refreshWx()}
-function backToHist(){resetForm();showTab('hist');window.scrollTo(0,0)}
-$('editBack').addEventListener('click',backToHist);
-
-$('saveBtn').addEventListener('click',function(){
-  if(!parseDt(cur.dt)){toast('日時を入れてください');return}
-  if(!cur.photoBlob&&!cur.photoUrl&&!cur.fav&&!cur.comment){
-    if(!confirm('写真もお気に入り度もメモも空です。このまま保存しますか？'))return;
-  }
-  var wasEdit=!!cur.id;
-  var id=cur.id||uid();
-  var newPhoto=!!cur.photoBlob;
-  var items=cur.sel.filter(function(x){return !!wById(x)});
-  var rec={id:id,dt:cur.dt,date:dateKey(cur.dt),fav:cur.fav,comment:cur.comment,weather:cur.weather,hasPhoto:!!(cur.photoBlob||cur.photoUrl),photoAt:cur.photoBlob?Date.now():(cur.photoAt||0),items:items,confirmed:!!cur.confirmed,ai:cur.ai||null,updatedAt:Date.now()};
-  var old=db.records.find(function(r){return r.id===id});
-  if(old&&!cur.photoBlob)rec.syncedPhotoAt=old.syncedPhotoAt||0;
-  delete db.tombs[id];
-  var i=db.records.findIndex(function(r){return r.id===id});
-  if(i>=0)db.records[i]=rec;else db.records.push(rec);
-  var p=cur.photoBlob?photoPut(id,cur.photoBlob):Promise.resolve();
-  function after(){
-    if(wasEdit)backToHist();else resetForm();
-    pushRecord(rec).catch(syncErr);
-    if(rec.hasPhoto&&!rec.confirmed&&(newPhoto||!rec.ai)&&canAI())runAI(id);
-  }
-  p.then(function(){save();toast('保存しました');after()}).catch(function(){
-    rec.hasPhoto=false;save();toast('写真を保存できませんでした(記録のみ保存)');after();
-  });
-});
-$('delBtn').addEventListener('click',function(){
-  if(!cur.id)return;
-  if(!confirm('この記録を削除しますか？(写真も消えます)'))return;
-  var id=cur.id;
-  db.records=db.records.filter(function(r){return r.id!==id});
-  db.tombs[id]=Date.now();
-  save();delete urlCache[id];photoDel(id).then(function(){toast('削除しました');backToHist();pushTomb(id).catch(syncErr)});
-});
-
-/* ---------- AI判定 ---------- */
-function getKey(){return localStorage.getItem(KEYLS)||''}
-function getModel(){return localStorage.getItem(MODELLS)||DEFMODEL}
-function canAI(){return !!getKey()&&db.wardrobe.some(function(w){return w.hasPhoto})}
-var aiBusy={};
-// AIの返事(JSON文字列)を、確信度の高い順の候補に直す。map は 番号→服のID
-function parseAI(text,map){
-  var t=String(text||'').replace(/^```(?:json)?/i,'').replace(/```$/,'').trim();
-  var j=JSON.parse(t);
-  var arr=Array.isArray(j)?j:(j.items||[]);
-  var seen={},out=[];
-  arr.forEach(function(x){
-    var id=map[x.no];var sc=Math.round(Number(x.score));
-    if(!id||!isFinite(sc)||seen[id])return;
-    sc=Math.max(0,Math.min(100,sc));
-    if(sc<10)return;
-    seen[id]=1;out.push({id:id,score:sc});
-  });
-  out.sort(function(a,b){return b.score-a.score});
-  return out.slice(0,20);
-}
-// AI判定の回数(この端末だけ。日付ごとに数える)
-var AICNT='outfit-log-aicnt';
-function aiCounts(){try{return JSON.parse(localStorage.getItem(AICNT)||'{}')||{}}catch(e){return {}}}
-function localDay(){var d=new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())}
-function aiCountInc(){
-  var c=aiCounts(),k=localDay();c[k]=(c[k]||0)+1;
-  var keep=Object.keys(c).sort().slice(-120),o={};keep.forEach(function(x){o[x]=c[x]});
-  localStorage.setItem(AICNT,JSON.stringify(o));
-  pushAiUsage(k);
-}
-function deviceId(){var d=localStorage.getItem('outfit-log-device');if(!d){d=Math.random().toString(36).slice(2,8);localStorage.setItem('outfit-log-device',d)}return d}
-// クラウドには、端末ごとの回数を「日付_端末ID」で置く。全端末の合計は足し算(同じ値を何度書いても変わらない)
-function pushAiUsage(day){
-  if(!(fb.user&&fb.db))return;
-  var o={};o[day+'_'+deviceId()]=aiCounts()[day]||0;
-  fb.db.collection('users').doc(fb.user.uid).collection('apps').doc('outfitLogAiUsage').set(o,{merge:true}).catch(function(e){console.warn('usage',e)});
-}
-function aiCountText(){
-  var c=aiCounts(),k=localDay(),m=k.slice(0,7),msum=0;
-  Object.keys(c).forEach(function(x){if(x.slice(0,7)===m)msum+=c[x]});
-  var dsum=c[k]||0;
-  if(cloudAi){
-    var cm=0,cd=0;
-    Object.keys(cloudAi).forEach(function(x){var n=Number(cloudAi[x]||0);if(x.indexOf(m+'-')===0)cm+=n;if(x.indexOf(k+'_')===0)cd+=n});
-    return '今月のAI判定 '+Math.max(cm,msum)+'回 / 今日 '+Math.max(cd,dsum)+'回(全端末の合計)';
-  }
-  return '今月のAI判定 '+msum+'回 / 今日 '+dsum+'回(この端末だけ。同期にログインすると全端末の合計になります)';
-}
-function askGemini(outfitBlob,items){
-  // items: [{no,name,cat,color,blob}]
-  var parts=[{text:'あなたは、全身写真に写っている人が着ている服を、ワードローブから見つける係です。\nまず、ワードローブの服が番号つきで並びます。最後に、今日の全身写真が1枚あります。'}];
-  return Promise.all(items.map(function(it){return blobToDataUrl(it.blob)})).then(function(urls){
-    items.forEach(function(it,k){
-      parts.push({text:'No.'+it.no+' '+it.name+'('+it.cat+(it.color?'・'+it.color:'')+(it.len?'・'+it.len:'')+')'});
-      parts.push({inlineData:{mimeType:'image/jpeg',data:urls[k].split(',')[1]}});
-    });
-    return blobToDataUrl(outfitBlob);
-  }).then(function(u){
-    parts.push({text:'ここから下が、今日の全身写真です。'});
-    parts.push({inlineData:{mimeType:'image/jpeg',data:u.split(',')[1]}});
-    parts.push({text:'全身写真の人が着ている服・靴・バッグを、ワードローブの番号から選んでください。\n・重ね着で隠れて見えない服は含めないでください。\n・似た服で迷うときは、可能性のあるものを、低めの確信度で含めてください。\n・JSONだけを返してください。形式: {"items":[{"no":番号,"score":確信度(0〜100の整数)}]}\n・確信度は「その服で合っている自信」です。1%以上の可能性があるものだけ入れてください。'});
-    aiCountInc();
-    return fetch('https://generativelanguage.googleapis.com/v1beta/models/'+encodeURIComponent(getModel())+':generateContent',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','x-goog-api-key':getKey()},
-      body:JSON.stringify({contents:[{role:'user',parts:parts}],generationConfig:{responseMimeType:'application/json',temperature:0.2}})
-    });
-  }).then(function(r){
-    if(!r.ok)throw new Error('http '+r.status);
-    return r.json();
-  }).then(function(j){
-    var c=j.candidates&&j.candidates[0],ps=c&&c.content&&c.content.parts||[];
-    var txt=ps.map(function(p){return p.text||''}).join('');
-    if(!txt)throw new Error('empty');
-    return txt;
-  });
-}
-function runAI(id){
-  var r=db.records.find(function(x){return x.id===id});
-  if(!r||!r.hasPhoto){return Promise.resolve()}
-  if(!getKey()){toast('設定でGeminiのキーを入れてください');return Promise.resolve()}
-  var ws=db.wardrobe.filter(function(w){return w.hasPhoto&&w.cat!=='インナー'}); // 肌着は写真に写らないので、AIには見せない
-  if(!ws.length){toast('ワードローブに写真つきの服を登録してください');return Promise.resolve()}
-  if(aiBusy[id])return Promise.resolve();
-  aiBusy[id]=true;toast('AI判定中…(数十秒かかります)');
-  var map={};
-  return Promise.all([photoGet(id)].concat(ws.map(function(w){return photoGet(w.id,'wphotos')}))).then(function(bl){
-    var outfit=bl[0];if(!outfit)throw new Error('nophoto');
-    var items=[];
-    ws.forEach(function(w,k){if(bl[k+1]){var no=items.length+1;map[no]=w.id;items.push({no:no,name:w.name,cat:w.cat,color:w.color||'',len:w.len||'',blob:bl[k+1]})}});
-    // 送る服の写真は小さくして、通信量とAIの負担を抑える
-    return Promise.all(items.map(function(it){return shrink(it.blob,320,0.72).then(function(b){it.blob=b})})).then(function(){return askGemini(outfit,items)});
-  }).then(function(txt){
-    var cands=parseAI(txt,map);
-    var rec=db.records.find(function(x){return x.id===id});
-    if(!rec)return;
-    rec.ai={at:Date.now(),model:getModel(),cands:cands};
-    if(!rec.confirmed)rec.items=cands.filter(function(c){return c.score>=SEL_SCORE}).map(function(c){return c.id});
-    rec.updatedAt=Date.now();save();
-    if(cur&&cur.id===id){cur.ai=rec.ai;cur.cands=cands;if(!cur.confirmed)cur.sel=rec.items.slice();renderWear()}
-    refreshUI();pushRecord(rec).catch(syncErr);
-    toast(cands.length?'AI判定が終わりました。履歴の「確認待ち」から確認できます':'AIが服を見つけられませんでした');
-  }).catch(function(e){
-    console.warn(e);
-    var m=String(e&&e.message||'');
-    toast(m.indexOf('http 400')===0||m.indexOf('http 403')===0?'AI判定に失敗(キーかモデル名を確認)':m.indexOf('http 429')===0?'AI判定の回数制限です。少し待ってやり直してください':'AI判定に失敗しました(通信を確認)');
-  }).then(function(){delete aiBusy[id]});
-}
-
-/* ---------- 着ていた服(編集画面の確認カード) ---------- */
-function renderWear(){
-  var card=$('wearCard');
-  if(!cur||!cur.id){card.classList.add('hide');return}
-  card.classList.remove('hide');
-  var st=$('wearState');
-  if(cur.confirmed){st.textContent='確定済み';st.className='badge ok'}
-  else if(cur.ai){st.textContent='AI推定(確認待ち)';st.className='badge wait'}
-  else{st.textContent='未判定';st.className='badge none'}
-  var score={};cur.cands.forEach(function(c){score[c.id]=c.score});
-  var ids=cur.cands.map(function(c){return c.id});
-  cur.sel.forEach(function(x){if(ids.indexOf(x)<0)ids.push(x)});
-  ids=ids.filter(function(x){return !!wById(x)});
-  var h='';
-  ids.forEach(function(x){
-    var w=wById(x),on=cur.sel.indexOf(x)>=0;
-    h+='<div class="cand" data-id="'+esc(x)+'"><div class="th">'+(w.hasPhoto?'<img data-wid="'+esc(x)+'" alt="">':'')+'</div><div class="nm">'+esc(w.name)+'<small>'+esc(w.cat)+(w.color?' / '+esc(w.color):'')+'</small></div><div class="sc">'+(score[x]!=null?score[x]+'%':'手動')+'</div><div class="chk'+(on?' on':'')+'">✓</div></div>';
-  });
-  $('wearList').innerHTML=h||'<div class="hint">まだ候補がありません。「AI判定」を押すか、「服を追加」で選んでください。</div>';
-  $('wearList').querySelectorAll('img[data-wid]').forEach(function(im){loadImg(im,im.getAttribute('data-wid'),'wphotos')});
-  var hint='';
-  if(!getKey())hint='AI判定を使うには、設定タブでGeminiのキーを入れてください。';
-  else if(!db.wardrobe.some(function(w){return w.hasPhoto}))hint='ワードローブに、写真つきの服を登録してください。';
-  else if(cur.cands.length)hint='確信が高い順です。'+SEL_SCORE+'%以上は最初からチェックしてあります。違う所を直してから「確定」してください。確定した記録だけ、着用回数に数えます。';
-  hint+=(hint?' ':'')+'インナー(肌着・下着)はAI判定に含みません。「服を追加」で選んでください。';
-  $('wearHint').textContent=hint;
-  $('aiBtn').textContent=cur.ai?'AI判定をやり直す':'AI判定';
-  var cf=$('confirmBtn');
-  cf.textContent=cur.confirmed?'✓ 確定済み(タップで取り消し)':'着た服を確定する';
-  cf.classList.toggle('on',!!cur.confirmed);
-}
-$('wearList').addEventListener('click',function(e){
-  var row=e.target.closest('.cand');if(!row)return;
-  var id=row.getAttribute('data-id'),i=cur.sel.indexOf(id);
-  if(i>=0)cur.sel.splice(i,1);else cur.sel.push(id);
-  renderWear();
-});
-$('confirmBtn').addEventListener('click',function(){
-  cur.confirmed=!cur.confirmed;renderWear();
-  if(cur.confirmed)toast('保存すると確定します');
-});
-$('aiBtn').addEventListener('click',function(){
-  if(!cur.id)return;
-  if(!getKey()){toast('設定でGeminiのキーを入れてください');return}
-  // 画面で変えた内容(写真など)が未保存だと、古い写真で判定してしまうので先に保存を促す
-  if(cur.photoBlob){toast('写真を変えたので、先に保存してください');return}
-  runAI(cur.id);
-});
-
-/* 服の選択(追加) */
-var pickCat='all';
-function openPicker(){pickCat='all';renderPicker();$('picker').classList.remove('hide')}
-function renderPicker(){
-  renderChips($('pickChips'),pickCat);
-  var list=db.wardrobe.filter(function(w){return pickCat==='all'||w.cat===pickCat});
-  var h='';
-  list.forEach(function(w){
-    h+='<div class="tile'+(cur.sel.indexOf(w.id)>=0?' sel':'')+'" data-id="'+esc(w.id)+'"><div class="ph">'+(w.hasPhoto?'<img data-wid="'+esc(w.id)+'" alt="">':'')+'</div><div class="nm">'+esc(w.name)+'</div></div>';
-  });
-  $('pickGrid').innerHTML=h||'<div class="empty" style="grid-column:1/-1">服がありません</div>';
-  $('pickGrid').querySelectorAll('img[data-wid]').forEach(function(im){loadImg(im,im.getAttribute('data-wid'),'wphotos')});
-}
-$('addItemBtn').addEventListener('click',function(){
-  if(!db.wardrobe.length){toast('先にワードローブへ服を登録してください');return}
-  openPicker();
-});
-$('pickGrid').addEventListener('click',function(e){
-  var t=e.target.closest('.tile');if(!t)return;
-  var id=t.getAttribute('data-id'),i=cur.sel.indexOf(id);
-  if(i>=0)cur.sel.splice(i,1);else cur.sel.push(id);
-  t.classList.toggle('sel');
-});
-$('pickChips').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;pickCat=b.getAttribute('data-c');renderPicker()});
-$('pickDone').addEventListener('click',function(){$('picker').classList.add('hide');renderWear()});
-
-/* ---------- 履歴 ---------- */
-var hfilter='all';
-function isPending(r){return !!(r.hasPhoto&&r.ai&&!r.confirmed)}
-function uncertainty(r){
-  // 選ばれている服のうち、一番自信が低いもの。低いほど先に見てほしい
-  var sc={};((r.ai&&r.ai.cands)||[]).forEach(function(c){sc[c.id]=c.score});
-  var sel=(r.items||[]);if(!sel.length)return 0;
-  var m=100;sel.forEach(function(id){m=Math.min(m,sc[id]!=null?sc[id]:0)});return m;
-}
-function badge(r){
-  if(r.confirmed)return '<span class="badge ok">確定</span>';
-  if(r.ai)return '<span class="badge wait">確認待ち</span>';
-  if(r.hasPhoto&&db.wardrobe.length)return '<span class="badge none">未判定</span>';
-  return '';
-}
-function renderHist(){
-  var box=$('histList');
-  var pend=db.records.filter(isPending);
-  $('pn').textContent=pend.length?'('+pend.length+')':'';
-  document.querySelectorAll('#hChips button').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-f')===hfilter)});
-  $('hHint').textContent=hfilter==='pending'?'AIの自信が低い記録から先に並んでいます。':'';
-  var list=(hfilter==='pending'?pend:db.records).slice();
-  if(hfilter==='pending')list.sort(function(a,b){var d=uncertainty(a)-uncertainty(b);return d||(a.dt<b.dt?1:-1)});
-  else list.sort(function(a,b){return a.dt<b.dt?1:a.dt>b.dt?-1:0});
-  if(!list.length){box.innerHTML='<div class="empty">'+(hfilter==='pending'?'確認待ちの記録はありません':'まだ記録がありません')+'</div>';return}
-  var html='',lastM='';
-  list.forEach(function(r){
-    if(hfilter!=='pending'){
-      var m=r.date.slice(0,7);
-      if(m!==lastM){html+='<div class="mon">'+(+m.slice(0,4))+'年'+(+m.slice(5,7))+'月</div>';lastM=m}
-    }
-    var wx=shortWx(r.weather);
-    var names=(r.items||[]).map(function(x){var w=wById(x);return w?w.name:null}).filter(Boolean);
-    html+='<div class="item" data-id="'+esc(r.id)+'"><div class="th">'+(r.hasPhoto?'<img data-pid="'+esc(r.id)+'" alt="">':'')+'</div><div class="tx"><div class="d">'+jpDate(r.date)+badge(r)+'</div>'
-      +(wx?'<div>'+esc(wx)+'</div>':'')
-      +(r.fav?'<div class="s">'+stars(r.fav)+'</div>':'')
-      +(names.length?'<div class="c">'+esc(names.join('、'))+'</div>':'')
-      +(r.comment?'<div class="c">'+esc(r.comment)+'</div>':'')+'</div></div>';
-  });
-  box.innerHTML=html;
-  box.querySelectorAll('img[data-pid]').forEach(function(im){loadImg(im,im.getAttribute('data-pid'),'photos')});
-}
-$('hChips').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;hfilter=b.getAttribute('data-f');renderHist()});
-$('histList').addEventListener('click',function(e){
-  var it=e.target.closest('.item');if(!it)return;
-  var id=it.getAttribute('data-id');
-  var r=db.records.find(function(x){return x.id===id});if(!r)return;
-  cur={id:r.id,photoAt:r.photoAt||0,photoBlob:null,photoUrl:null,dt:r.dt,fav:r.fav||0,comment:r.comment||'',loc:r.weather&&r.weather.loc?r.weather.loc:(db.settings.base||null),locIsBase:false,weather:r.weather||null,wxBusy:false,cands:(r.ai&&r.ai.cands)?r.ai.cands.slice():[],sel:(r.items||[]).slice(),confirmed:!!r.confirmed,ai:r.ai||null};
-  setPhotoUrl(null);
-  if(r.hasPhoto)photoGet(r.id).then(function(b){if(b&&cur.id===r.id&&!cur.photoBlob)setPhotoUrl(URL.createObjectURL(b))});
-  renderForm();showTab('shot');window.scrollTo(0,0);
-});
-
-/* ---------- ワードローブ ---------- */
-var wfilter='all',wcur=null;
-function renderChips(el,active){
-  var h='<button data-c="all" class="'+(active==='all'?'on':'')+'">すべて</button>';
-  CATS.forEach(function(c){h+='<button data-c="'+esc(c)+'" class="'+(active===c?'on':'')+'">'+esc(c)+'</button>'});
-  el.innerHTML=h;
-}
-function renderWard(){
-  renderChips($('wChips'),wfilter);
-  var cnt=wearCounts();
-  var list=db.wardrobe.filter(function(w){return wfilter==='all'||w.cat===wfilter}).sort(function(a,b){return (b.updatedAt||0)-(a.updatedAt||0)});
-  $('wCount').textContent=db.wardrobe.length+'着';
-  var h='';
-  list.forEach(function(w){
-    h+='<div class="tile" data-id="'+esc(w.id)+'"><div class="ph">'+(w.hasPhoto?'<img data-wid="'+esc(w.id)+'" alt="">':'')+'</div><div class="nm">'+esc(w.name)+'</div><div class="ct">'+(cnt[w.id]||0)+'回</div></div>';
-  });
-  $('wGrid').innerHTML=h||'<div class="empty" style="grid-column:1/-1">'+(db.wardrobe.length?'このカテゴリの服はありません':'まだ服がありません。「＋ 服を登録」から追加してください')+'</div>';
-  $('wGrid').querySelectorAll('img[data-wid]').forEach(function(im){loadImg(im,im.getAttribute('data-wid'),'wphotos')});
-}
-function showWList(){$('wFormView').classList.add('hide');$('wListView').classList.remove('hide');renderWard();window.scrollTo(0,0)}
-/* ---------- 色の候補・ブランド ---------- */
-// 色は、衣料品サイトの色の絞り込みを参考にした約14色(数と名前は目安)
-var COLORS=[
-  {n:'白',c:'#f2f2ee'},{n:'黒',c:'#222222'},{n:'グレー',c:'#9a9a9a'},{n:'ベージュ',c:'#d8c3a0'},{n:'ブラウン',c:'#7a5230'},
-  {n:'ネイビー',c:'#1f2d5a'},{n:'ブルー',c:'#3b78c4'},{n:'グリーン',c:'#3d8a4f'},{n:'カーキ',c:'#7b7a45'},
-  {n:'イエロー',c:'#e8c53a'},{n:'オレンジ',c:'#e8812e'},{n:'レッド',c:'#c8312f'},{n:'ピンク',c:'#eba0b8'},{n:'パープル',c:'#7a52a0'}
-];
-var COLOR_OTHERS=['柄・マルチ','その他'];
-var BRANDS=['ユニクロ','GU','無印良品','ZARA','H&M','しまむら','ワークマン','GAP',"Levi's",'ユナイテッドアローズ','BEAMS','nano・universe','adidas','Nike','New Balance','Champion','THE NORTH FACE','Patagonia','Carhartt'];
-var BRAND_TOP=['ユニクロ','GU','無印良品'];
-var BRAND_SITE={'ユニクロ':'uniqlo.com/jp','UNIQLO':'uniqlo.com/jp','GU':'gu-global.com/jp','無印良品':'muji.com/jp'};
-function hexRgb(h){return [parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)]}
-function rgbLab(r,g,b){
-  function f(v){v/=255;return v>0.04045?Math.pow((v+0.055)/1.055,2.4):v/12.92}
-  var R=f(r),G=f(g),B=f(b);
-  var X=(R*0.4124+G*0.3576+B*0.1805)/0.95047,Y=R*0.2126+G*0.7152+B*0.0722,Z=(R*0.0193+G*0.1192+B*0.9505)/1.08883;
-  function t(v){return v>0.008856?Math.pow(v,1/3):7.787*v+16/116}
-  return [116*t(Y)-16,500*(t(X)-t(Y)),200*(t(Y)-t(Z))];
-}
-COLORS.forEach(function(c){var a=hexRgb(c.c);c.lab=rgbLab(a[0],a[1],a[2])});
-// 服の写真から、多く使われている色を、候補の名前で最大3つ返す
-function suggestColors(blob){
-  return createImageBitmap(blob).then(function(bm){
-    var S=48,cv=document.createElement('canvas');cv.width=S;cv.height=S;
-    var x=cv.getContext('2d');
-    x.drawImage(bm,bm.width*0.15,bm.height*0.15,bm.width*0.7,bm.height*0.7,0,0,S,S); // 真ん中を見る(端の背景を避ける)
-    var d=x.getImageData(0,0,S,S).data,cnt=COLORS.map(function(){return 0}),total=0;
-    for(var i=0;i<d.length;i+=4){
-      if(d[i+3]<200)continue;
-      if(d[i]>=250&&d[i+1]>=250&&d[i+2]>=250)continue; // 背景を消した白地は数えない
-      var l=rgbLab(d[i],d[i+1],d[i+2]),best=0,bd=1e9;
-      for(var k=0;k<COLORS.length;k++){var q=COLORS[k].lab,e=(l[0]-q[0])*(l[0]-q[0])+(l[1]-q[1])*(l[1]-q[1])+(l[2]-q[2])*(l[2]-q[2]);if(e<bd){bd=e;best=k}}
-      cnt[best]++;total++;
-    }
-    if(!total)return ['白'];
-    return cnt.map(function(n,k){return {n:COLORS[k].n,r:n/total}}).filter(function(o){return o.r>=0.12}).sort(function(a,b){return b.r-a.r}).slice(0,3).map(function(o){return o.n});
-  });
-}
-function swHtml(name,on,bg){
-  return '<button type="button" class="sw'+(on?' on':'')+'" data-c="'+esc(name)+'"><i style="'+bg+'"></i>'+esc(name)+'</button>';
-}
-function swBg(name){
-  if(name==='柄・マルチ')return 'background:conic-gradient(#c8312f,#e8c53a,#3d8a4f,#3b78c4,#7a52a0,#c8312f)';
-  if(name==='その他')return 'background:#fff;border-style:dashed';
-  var c=COLORS.find(function(x){return x.n===name});return 'background:'+(c?c.c:'#fff');
-}
-function renderLen(){
-  if(!wcur)return;
-  var opts=lenOptions($('wCat').value);
-  if(opts.indexOf(wcur.len)<0)wcur.len='';
-  $('wLenBox').classList.toggle('hide',!opts.length);
-  $('wLen').innerHTML=opts.map(function(n){return '<button type="button" class="sw nl'+(wcur.len===n?' on':'')+'" data-l="'+esc(n)+'">'+esc(n)+'</button>'}).join('');
-}
-$('wLen').addEventListener('click',function(e){var b=e.target.closest('[data-l]');if(!b||!wcur)return;var n=b.getAttribute('data-l');wcur.len=(wcur.len===n)?'':n;renderLen()});
-$('wCat').addEventListener('change',renderLen);
-function renderColor(){
-  if(!wcur)return;
-  var sug=wcur.sug||[];
-  $('wSugBox').classList.toggle('hide',!sug.length);
-  $('wSug').innerHTML=sug.map(function(n){return swHtml(n,wcur.color===n,swBg(n))}).join('');
-  var all=COLORS.map(function(c){return c.n}).concat(COLOR_OTHERS);
-  $('wSw').innerHTML=all.map(function(n){return swHtml(n,wcur.color===n,swBg(n))}).join('');
-  $('wColor').classList.toggle('hide',wcur.color!=='その他');
-}
-function onSwClick(e){
-  var b=e.target.closest('.sw');if(!b||!wcur)return;
-  var n=b.getAttribute('data-c');wcur.color=(wcur.color===n)?'':n;renderColor();
-  if(wcur.color==='その他')$('wColor').focus();
-}
-$('wSug').addEventListener('click',onSwClick);
-$('wSw').addEventListener('click',onSwClick);
-var sugSeq=0;
-function refreshSug(u){
-  var my=++sugSeq;
-  if(!u){wcur.sug=[];renderColor();return}
-  fetch(u).then(function(r){return r.blob()}).then(suggestColors).then(function(list){
-    if(my!==sugSeq||!wcur)return;wcur.sug=list;renderColor();
-  }).catch(function(){if(my===sugSeq&&wcur){wcur.sug=[];renderColor()}});
-}
-// ブランド
-$('brandList').innerHTML=BRANDS.map(function(b){return '<option value="'+esc(b)+'">'}).join('');
-$('wBrandChips').innerHTML=BRAND_TOP.map(function(b){return '<button type="button" class="sw" data-b="'+esc(b)+'">'+esc(b)+'</button>'}).join('');
-$('wBrandChips').addEventListener('click',function(e){var b=e.target.closest('[data-b]');if(!b)return;$('wBrand').value=$('wBrand').value===b.getAttribute('data-b')?'':b.getAttribute('data-b')});
-$('wFind').addEventListener('click',function(){
-  var brand=$('wBrand').value.trim(),name=$('wName').value.trim();
-  if(!brand&&!name){toast('ブランドか名前を入れてください');return}
-  var kw=name||((wcur&&wcur.color&&wcur.color!=='その他'?wcur.color:'')+$('wCat').value);
-  var site=BRAND_SITE[brand];
-  var q=(site?'site:'+site+' ':(brand?brand+' ':''))+kw;
-  window.open('https://www.google.com/search?q='+encodeURIComponent(q),'_blank','noopener');
-});
-
-function setWPhoto(u){
-  if(wcur.photoUrl&&wcur.photoUrl.indexOf('blob:')===0)URL.revokeObjectURL(wcur.photoUrl);
-  wcur.photoUrl=u;
-  var im=$('wPhotoImg');
-  if(u){im.src=u;im.classList.remove('hide');$('wPhotoHint').classList.add('hide')}
-  else{im.removeAttribute('src');im.classList.add('hide');$('wPhotoHint').classList.remove('hide')}
-  refreshSug(u);
-}
-
-/* ---------- 服の写真の背景をきれいにする(ブラウザ内で処理。外に送らない) ---------- */
-// ライブラリ: @imgly/background-removal(AGPL-3.0)。使うときだけCDNから読み込む。
-var BGLIB='https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.7.0/+esm';
-var bgMod=null;
-function loadBg(){
-  if(!bgMod)bgMod=import(BGLIB).catch(function(e){bgMod=null;throw e});
-  return bgMod;
-}
-// 透明背景のPNGを、服の範囲で切り出し、白地の正方形に置いてJPEGにする
-function whiteSquare(png,maxSize){
-  maxSize=maxSize||640;
-  return createImageBitmap(png).then(function(bm){
-    var c=document.createElement('canvas');c.width=bm.width;c.height=bm.height;
-    var x=c.getContext('2d');x.drawImage(bm,0,0);
-    var d=x.getImageData(0,0,c.width,c.height).data,minX=c.width,minY=c.height,maxX=-1,maxY=-1;
-    for(var y=0;y<c.height;y++)for(var xx=0;xx<c.width;xx++){
-      if(d[(y*c.width+xx)*4+3]>24){if(xx<minX)minX=xx;if(xx>maxX)maxX=xx;if(y<minY)minY=y;if(y>maxY)maxY=y}
-    }
-    if(maxX<0)throw new Error('empty'); // 何も見つからなかった
-    var w=maxX-minX+1,h=maxY-minY+1,side=Math.max(w,h),pad=Math.round(side*0.06),box=side+pad*2;
-    var size=Math.min(maxSize,box); // 元より大きく伸ばさない(ぼやけの原因になる)
-    var o=document.createElement('canvas');o.width=size;o.height=size;
-    var ox=o.getContext('2d');ox.fillStyle='#fff';ox.fillRect(0,0,size,size);
-    var k=size/box;
-    ox.drawImage(c,minX,minY,w,h,Math.round((size-w*k)/2),Math.round((size-h*k)/2),Math.round(w*k),Math.round(h*k));
-    return new Promise(function(res,rej){o.toBlob(function(b){b?res(b):rej(new Error('blob'))},'image/jpeg',0.9)});
-  });
-}
-function removeBg(blob,onProgress){
-  return loadBg().then(function(m){
-    var fn=m.removeBackground||(m.default&&m.default.removeBackground)||m.default;
-    if(typeof fn!=='function')throw new Error('nolib');
-    return fn(blob,{model:'isnet_quint8',output:{format:'image/png'},progress:function(key,cur,total){if(onProgress&&total)onProgress(key,cur/total)}});
-  }).then(function(png){return whiteSquare(png,640)});
-}
-function renderBg(){
-  if(!wcur)return;
-  var has=!!wcur.photoUrl,st=wcur.stage||'';
-  $('bgRun').classList.toggle('hide',!has||st==='busy'||st==='preview');
-  $('bgCancel').classList.toggle('hide',st!=='preview');
-  $('bgApply').classList.toggle('hide',st!=='preview');
-  $('bgUndo').classList.toggle('hide',st!=='applied');
-  $('bgMsg').textContent=st==='busy'?(wcur.bgMsg||'処理中…'):st==='preview'?'この仕上がりでよければ「これにする」(押さずに保存しても、この仕上がりで保存されます)。違えば「やめる」で元の写真に戻ります。':st==='applied'?'✓ この仕上がりを保存します':(wcur.bgDone&&has?'✓ 背景をきれいにした写真です':'');
-}
-$('bgRun').addEventListener('click',function(){
-  var me=wcur;if(!me||me.stage==='busy')return;
-  me.stage='busy';me.bgMsg='準備中…(初回は読み込みに時間がかかります。Wi-Fi推奨)';renderBg();
-  // 撮ったばかりの大きい写真があればそれを使う。一度「これにする」で仕上げたあとは、その結果をもとにやり直す
-  var src=me.bigBlob?Promise.resolve(me.bigBlob):(me.photoBlob?Promise.resolve(me.photoBlob):(me.id?photoGet(me.id,'wphotos'):Promise.resolve(null)));
-  src.then(function(b){
-    if(!b)throw new Error('nophoto');
-    me.srcBlob=b;
-    return removeBg(b,function(key,r){
-      if(wcur!==me)return;
-      me.bgMsg=(key&&key.indexOf('fetch')===0?'モデルを読み込み中 ':'処理中 ')+Math.round(r*100)+'%';renderBg();
-    });
-  }).then(function(out){
-    if(wcur!==me)return;
-    me.prevBlob=out;me.stage='preview';setWPhoto(URL.createObjectURL(out));renderBg();
-  }).catch(function(e){
-    console.warn(e);
-    if(wcur!==me)return;
-    me.stage='';renderBg();
-    toast(String(e&&e.message)==='empty'?'服が見つかりませんでした(元の写真のままです)':'背景を消せませんでした(元の写真のまま使えます)');
-  });
-});
-$('bgCancel').addEventListener('click',function(){
-  if(!wcur||wcur.stage!=='preview')return;
-  setWPhoto(URL.createObjectURL(wcur.srcBlob));wcur.prevBlob=null;wcur.stage='';renderBg();
-});
-// 仕上がりを、保存する写真にする(「これにする」と、仕上がりが出たまま保存したときの両方で使う)
-function applyBg(){
-  if(!wcur||wcur.stage!=='preview')return false;
-  wcur.origBlob=wcur.srcBlob===wcur.bigBlob?wcur.photoBlob:wcur.srcBlob;wcur.origBig=wcur.bigBlob;wcur.bigBlob=null;wcur.photoBlob=wcur.prevBlob;
-  wcur.origBgDone=!!wcur.bgDone;wcur.bgDone=true;wcur.stage='applied';renderBg();
-  return true;
-}
-$('bgApply').addEventListener('click',function(){if(applyBg())toast('保存すると反映されます')});
-$('bgUndo').addEventListener('click',function(){
-  if(!wcur||wcur.stage!=='applied'||!wcur.origBlob)return;
-  wcur.photoBlob=wcur.origBlob;wcur.origBlob=null;wcur.bigBlob=wcur.origBig||null;wcur.origBig=null;wcur.bgDone=!!wcur.origBgDone;setWPhoto(URL.createObjectURL(wcur.photoBlob));wcur.stage='';renderBg();
-});
-
-function openWForm(w){
-  wcur=w?{id:w.id,photoBlob:null,photoUrl:null,hasPhoto:!!w.hasPhoto}:{id:null,photoBlob:null,photoUrl:null,hasPhoto:false};
-  var col=w?(w.color||''):'',inPal=COLORS.some(function(c){return c.n===col})||COLOR_OTHERS.indexOf(col)>=0;
-  wcur.color=inPal?col:(col?'その他':'');wcur.sug=[];wcur.len=w?(w.len||''):'';wcur.bgDone=w?!!w.bgDone:false;
-  $('wColor').value=inPal?'':col;
-  setWPhoto(null);renderBg();renderColor();
-  if(w&&w.hasPhoto)photoGet(w.id,'wphotos').then(function(b){if(b&&wcur&&wcur.id===w.id&&!wcur.photoBlob){setWPhoto(URL.createObjectURL(b));renderBg()}});
-  $('wName').value=w?w.name:'';
-  $('wCat').value=w?w.cat:CATS[0];renderLen();
-  $('wBrand').value=w?(w.brand||''):'';
-  $('wPrice').value=w&&w.price!=null?w.price:'';
-  $('wBought').value=w?(w.bought||''):'';
-  $('wSold').value=w&&w.sold!=null?w.sold:'';
-  $('wFormLabel').textContent=w?'服を編集':'服を登録';
-  $('wDel').classList.toggle('hide',!w);
-  $('wSaveNext').classList.toggle('hide',!!w);
-  var st='';
-  if(w){
-    var n=wearCounts()[w.id]||0;
-    st='着用 '+n+'回(確定した記録から数えています)';
-    if(w.price!=null&&n>0)st+='\n1回あたり '+yen(w.price/n);
-    if(w.sold!=null&&w.price!=null){var d=w.sold-w.price;st+='\n売却して '+(d>=0?'+':'−')+yen(Math.abs(d))+'(売却額−購入価格)'}
-  }
-  $('wStats').style.whiteSpace='pre-line';
-  $('wStats').textContent=st;
-  $('wListView').classList.add('hide');$('wFormView').classList.remove('hide');window.scrollTo(0,0);
-}
-$('wCat').innerHTML=CATS.map(function(c){return '<option>'+esc(c)+'</option>'}).join('');
-$('wAdd').addEventListener('click',function(){openWForm(null)});
-$('wBack').addEventListener('click',showWList);
-$('wChips').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;wfilter=b.getAttribute('data-c');renderWard()});
-$('wGrid').addEventListener('click',function(e){
-  var t=e.target.closest('.tile');if(!t)return;
-  var w=wById(t.getAttribute('data-id'));if(w)openWForm(w);
-});
-$('wPhotoInput').addEventListener('change',function(e){
-  var f=e.target.files&&e.target.files[0];if(!f)return;
-  // 大きめ(1024px)で受けて、保存用(640px)と、背景を消す用(1024px)に分ける
-  shrink(f,1024,0.86).then(function(big){return shrink(big,640,0.84).then(function(b){wcur.bigBlob=big;wcur.photoBlob=b;wcur.bgDone=false;wcur.stage='';wcur.origBlob=null;wcur.origBig=null;setWPhoto(URL.createObjectURL(b));renderBg()})}).catch(function(){toast('写真を読み込めませんでした')});
-  e.target.value='';
-});
-function saveWard(next){
-  var name=$('wName').value.trim();
-  if(!name){toast('名前を入れてください');return}
-  if(wcur.stage==='busy'){toast('背景をきれいにしている途中です。終わるまで待ってください');return}
-  applyBg(); // 仕上がりが出たままなら、その写真を保存する
-  var id=wcur.id||uid('w');
-  var old=wById(id);
-  var w={id:id,name:name,cat:$('wCat').value,color:(wcur.color==='その他'?($('wColor').value.trim()||'その他'):(wcur.color||'')),brand:$('wBrand').value.trim(),bgDone:!!wcur.bgDone,len:(lenOptions($('wCat').value).indexOf(wcur.len)>=0?wcur.len:''),price:numOrNull($('wPrice').value),bought:$('wBought').value||'',sold:numOrNull($('wSold').value),hasPhoto:!!(wcur.photoBlob||(old&&old.hasPhoto)),updatedAt:Date.now()};
-  var i=wIdx(id);if(i>=0)db.wardrobe[i]=w;else db.wardrobe.push(w);
-  delete db.wtombs[id];
-  var p=wcur.photoBlob?photoPut(id,wcur.photoBlob,'wphotos'):Promise.resolve();
-  p.then(function(){
-    save();delete wurl[id];toast('保存しました');
-    pushWard(w).catch(syncErr);
-    if(next){openWForm(null)}else showWList();
-  }).catch(function(){w.hasPhoto=false;save();toast('写真を保存できませんでした(服の情報のみ保存)');showWList()});
-}
-$('wSave').addEventListener('click',function(){saveWard(false)});
-$('wSaveNext').addEventListener('click',function(){saveWard(true)});
-$('wDel').addEventListener('click',function(){
-  if(!wcur||!wcur.id)return;
-  var n=wearCounts()[wcur.id]||0;
-  if(!confirm('この服を削除しますか？'+(n?'\n(着用 '+n+'回の記録からも外れます)':'')))return;
-  var id=wcur.id;
-  db.wardrobe=db.wardrobe.filter(function(w){return w.id!==id});
-  db.wtombs[id]=Date.now();save();delete wurl[id];
-  photoDel(id,'wphotos').then(function(){toast('削除しました');showWList();pushWTomb(id).catch(syncErr)});
-});
-
-/* ---------- 設定 ---------- */
-function renderSet(){
-  var b=db.settings.base;
-  $('baseName').textContent=b?b.name:'未設定';
-  $('stat').textContent='記録 '+db.records.length+' 件 / 服 '+db.wardrobe.length+' 着';
-  var k=getKey();
-  $('aiCount').textContent=aiCountText();
-  $('keyState').textContent=k?'キー: 保存済み(末尾 '+k.slice(-4)+')':'キー: 未設定';
-  $('gmodel').value=getModel();
-}
-$('gSave').addEventListener('click',function(){
-  var k=$('gkey').value.trim(),m=$('gmodel').value.trim();
-  if(k)localStorage.setItem(KEYLS,k);
-  if(m&&m!==DEFMODEL)localStorage.setItem(MODELLS,m);else localStorage.removeItem(MODELLS);
-  $('gkey').value='';renderSet();toast(k?'保存しました':'モデル名を保存しました');
-});
-$('gClear').addEventListener('click',function(){
-  if(!getKey())return;
-  if(!confirm('保存してあるキーを消しますか？(AI判定が使えなくなります)'))return;
-  localStorage.removeItem(KEYLS);renderSet();toast('キーを消しました');
-});
-locSearch($('baseQ'),$('baseRes'),function(x){
-  db.settings.base={name:x.name,lat:x.lat,lon:x.lon};db.settingsAt=Date.now();save();renderSet();pushSettings().catch(syncErr);
-  if(!cur.id&&cur.locIsBase){cur.loc={name:x.name,lat:x.lat,lon:x.lon};renderLoc();refreshWx()}
-  toast('基本の地点を変えました');
-});
-$('exportBtn').addEventListener('click',function(){
-  var out={app:'outfit-log',version:2,exportedAt:new Date().toISOString(),settings:db.settings,records:db.records,wardrobe:db.wardrobe,photos:{},wphotos:{}};
-  var jobs=[];
-  db.records.filter(function(r){return r.hasPhoto}).forEach(function(r){jobs.push(photoGet(r.id).then(function(b){return b?blobToDataUrl(b).then(function(u){out.photos[r.id]=u}):null}))});
-  db.wardrobe.filter(function(w){return w.hasPhoto}).forEach(function(w){jobs.push(photoGet(w.id,'wphotos').then(function(b){return b?blobToDataUrl(b).then(function(u){out.wphotos[w.id]=u}):null}))});
-  Promise.all(jobs).then(function(){
-    var blob=new Blob([JSON.stringify(out)],{type:'application/json'});
-    var a=document.createElement('a');a.href=URL.createObjectURL(blob);
-    var d=new Date();a.download='outfit-log-backup-'+d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+'.json';
-    document.body.appendChild(a);a.click();a.remove();toast('書き出しました(キーは入りません)');
-  });
-});
-$('importBtn').addEventListener('click',function(){$('importFile').click()});
-$('importFile').addEventListener('change',function(e){
-  var f=e.target.files&&e.target.files[0];e.target.value='';if(!f)return;
-  var r=new FileReader();
-  r.onload=function(){
-    var j;try{j=JSON.parse(r.result)}catch(x){toast('読み込めないファイルです');return}
-    if(!j||j.app!=='outfit-log'||!Array.isArray(j.records)){toast('このアプリのバックアップではありません');return}
-    var jw=Array.isArray(j.wardrobe)?j.wardrobe:[];
-    if(!confirm('今の記録('+db.records.length+'件)・服('+db.wardrobe.length+'着)を、ファイルの内容(記録'+j.records.length+'件・服'+jw.length+'着)で置き換えます。よろしいですか？'))return;
-    var photos=j.photos||{},wphotos=j.wphotos||{};
-    function putAll(map,st){return Promise.all(Object.keys(map).map(function(id){return fetch(map[id]).then(function(q){return q.blob()}).then(function(b){return photoPut(id,b,st)})}))}
-    Promise.all(db.records.map(function(x){return photoDel(x.id)}).concat(db.wardrobe.map(function(x){return photoDel(x.id,'wphotos')}))).then(function(){
-      return Promise.all([putAll(photos,'photos'),putAll(wphotos,'wphotos')]);
-    }).then(function(){
-      var keep={},keepW={},now=Date.now();
-      j.records.forEach(function(x){keep[x.id]=1});jw.forEach(function(x){keepW[x.id]=1});
-      db.records.forEach(function(o){if(!keep[o.id])db.tombs[o.id]=now});
-      db.wardrobe.forEach(function(o){if(!keepW[o.id])db.wtombs[o.id]=now});
-      j.records.forEach(function(x){delete db.tombs[x.id];x.updatedAt=now;x.photoAt=x.hasPhoto?now:0;x.syncedPhotoAt=0;if(!x.items)x.items=[]});
-      jw.forEach(function(x){delete db.wtombs[x.id];x.updatedAt=now});
-      db.settings=j.settings||{base:null};db.settingsAt=now;db.records=j.records;db.wardrobe=jw;urlCache={};wurl={};save();
-      resetForm();renderSet();renderHist();renderWard();toast('読み込みました');
-      pushAll(null).catch(syncErr);
-    }).catch(function(){toast('読み込み中に失敗しました')});
-  };
-  r.readAsText(f);
-});
-
-/* ---------- タブ・更新 ---------- */
-function showTab(t){
-  ['shot','hist','ward','set'].forEach(function(k){$('tab-'+k).classList.toggle('hide',k!==t)});
-  document.querySelectorAll('.tabs button').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-t')===t)});
-  if(t==='hist')renderHist();
-  if(t==='set')renderSet();
-  if(t==='ward'){$('wFormView').classList.add('hide');$('wListView').classList.remove('hide');renderWard()}
-}
-document.querySelector('.tabs').addEventListener('click',function(e){var b=e.target.closest('button');if(b)showTab(b.getAttribute('data-t'))});
-$('reload').addEventListener('click',function(){location.reload()});
-
-load();
-cur=newCur();renderForm();refreshWx();renderSet();
-
-/* ---------- クラウド同期(Firebase + Googleログイン) ---------- */
-// 他のアプリと同じFirebaseプロジェクト。保存先は users/{uid}/apps/outfit-log 配下。
-// 写真があるので1文書に収まらない(上限1MB)。記録とワードローブは1件ごとの文書にする。
-// 記録の写真は、同期用に縮小して別の文書に置く。服の写真は小さいので、服の文書に入れる。
-var FBC={
-  apiKey:"AIzaSyAMy7k0bx1IyOu2eBCeiOnwclYtSEfrigY",
-  authDomain:"nemui-neko-apps.firebaseapp.com",
-  projectId:"nemui-neko-apps",
-  storageBucket:"nemui-neko-apps.firebasestorage.app",
-  messagingSenderId:"433296418616",
-  appId:"1:433296418616:web:bf83c521c8355487c883cd"
 };
-var fb={user:null,db:null,unsubR:null,unsubS:null,unsubW:null,unsubA:null,warned:false};
-var cloudAi=null; // クラウドのAI判定の回数(ログイン中だけ)
-function appDoc(){return fb.db.collection('users').doc(fb.user.uid).collection('apps').doc('outfit-log')}
-function recCol(){return appDoc().collection('records')}
-function phCol(){return appDoc().collection('photos')}
-function wardCol(){return appDoc().collection('wardrobe')}
-function syncErr(e){
-  console.warn(e);
-  if(!fb.warned){fb.warned=true;toast('同期に失敗しました(通信か、Firestoreのルールを確認)')}
-}
-function recIdx(id){return db.records.findIndex(function(r){return r.id===id})}
-function clean(o){return JSON.parse(JSON.stringify(o))}
+reset();
+$('reloadBtn').onclick=()=>location.reload();
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab,.panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');$(b.dataset.tab).classList.add('active');if(b.dataset.tab==='stats')stats()});
 
-function uploadPhoto(r){
-  return photoGet(r.id).then(function(b){
-    if(!b)return;
-    return shrink(b,800,0.7).then(blobToDataUrl).then(function(u){
-      return phCol().doc(r.id).set({data:u,photoAt:r.photoAt||0});
-    }).then(function(){r.syncedPhotoAt=r.photoAt||0;save()});
-  });
+/* ===== 入力中の曲名・アーティスト候補検索 ===== */
+let suggestTimer=null,suggestController=null,suggestSource='';
+function clearSuggestions(){if(suggestController)suggestController.abort();$('results').innerHTML='';}
+function addSuggestion(main,sub,onSelect){
+  const b=document.createElement('button');b.type='button';b.className='suggestion';b.setAttribute('role','option');
+  const strong=document.createElement('strong');strong.textContent=main;
+  const small=document.createElement('small');small.textContent=sub||'詳細不明';
+  b.append(strong,small);b.onclick=()=>{onSelect();clearSuggestions()};$('results').append(b);
 }
-function pushRecord(r){
-  if(!fb.user)return Promise.resolve();
-  var p=Promise.resolve();
-  if(r.hasPhoto&&(r.photoAt||0)>(r.syncedPhotoAt||0))p=uploadPhoto(r);
-  return p.then(function(){
-    return recCol().doc(r.id).set(clean({id:r.id,dt:r.dt,date:r.date,fav:r.fav||0,comment:r.comment||'',weather:r.weather||null,hasPhoto:!!r.hasPhoto,photoAt:r.photoAt||0,items:r.items||[],confirmed:!!r.confirmed,ai:r.ai||null,updatedAt:r.updatedAt||0,deleted:false}));
-  });
-}
-function pushTomb(id){
-  if(!fb.user)return Promise.resolve();
-  return recCol().doc(id).set({id:id,deleted:true,updatedAt:db.tombs[id]||Date.now()}).then(function(){return phCol().doc(id).delete()});
-}
-function pushWard(w){
-  if(!fb.user)return Promise.resolve();
-  return (w.hasPhoto?photoGet(w.id,'wphotos').then(function(b){return b?blobToDataUrl(b):null}):Promise.resolve(null)).then(function(u){
-    return wardCol().doc(w.id).set(clean({id:w.id,name:w.name,cat:w.cat,color:w.color||'',brand:w.brand||'',len:w.len||'',bgDone:!!w.bgDone,price:w.price==null?null:w.price,bought:w.bought||'',sold:w.sold==null?null:w.sold,hasPhoto:!!u,photo:u||null,updatedAt:w.updatedAt||0,deleted:false}));
-  });
-}
-function pushWTomb(id){
-  if(!fb.user)return Promise.resolve();
-  return wardCol().doc(id).set({id:id,deleted:true,updatedAt:db.wtombs[id]||Date.now()});
-}
-function pushSettings(){
-  if(!fb.user)return Promise.resolve();
-  return appDoc().set(clean({base:db.settings.base||null,updatedAt:db.settingsAt||0}));
-}
-function pushAll(skipIds,skipW){
-  if(!fb.user)return Promise.resolve();
-  var jobs=[];
-  db.records.forEach(function(r){if(!skipIds||!skipIds[r.id])jobs.push(pushRecord(r))});
-  Object.keys(db.tombs).forEach(function(id){if(!skipIds||!skipIds[id])jobs.push(pushTomb(id))});
-  db.wardrobe.forEach(function(w){if(!skipW||!skipW[w.id])jobs.push(pushWard(w))});
-  Object.keys(db.wtombs).forEach(function(id){if(!skipW||!skipW[id])jobs.push(pushWTomb(id))});
-  return Promise.all(jobs);
-}
-function downloadPhoto(r,d){
-  return phCol().doc(r.id).get().then(function(snap){
-    if(!snap.exists)return;
-    var x=snap.data();
-    return fetch(x.data).then(function(q){return q.blob()}).then(function(b){return photoPut(r.id,b)}).then(function(){
-      r.hasPhoto=true;r.photoAt=x.photoAt||d.photoAt||0;r.syncedPhotoAt=r.photoAt;delete urlCache[r.id];save();
+async function searchSuggestions(kind,q){
+  if(suggestController)suggestController.abort();
+  const controller=new AbortController();suggestController=controller;suggestSource=kind;
+  const endpoint=kind==='title'?'recording':'artist';
+  const url='https://musicbrainz.org/ws/2/'+endpoint+'/?query='+encodeURIComponent(q)+'&fmt=json&limit=8';
+  try{
+    const response=await fetch(url,{headers:{Accept:'application/json'},signal:controller.signal});
+    if(!response.ok)throw Error('search failed');
+    const data=await response.json();
+    if(controller!==suggestController||suggestSource!==kind)return;
+    $('results').innerHTML='';
+    const hits=kind==='title'?(data.recordings||[]):(data.artists||[]);
+    if(!hits.length){$('results').textContent='候補が見つかりません。手入力できます。';return}
+    hits.forEach(hit=>{
+      if(kind==='title'){
+        const artist=(hit['artist-credit']||[]).map(a=>a.name||a.artist?.name).filter(Boolean).join(' / ');
+        addSuggestion(hit.title,artist||'アーティスト不明',()=>{$('title').value=hit.title;$('artist').value=artist;$('title').focus()});
+      }else{
+        const detail=[hit.type,hit.country].filter(Boolean).join(' · ');
+        addSuggestion(hit.name,detail,()=>{$('artist').value=hit.name;$('artist').focus()});
+      }
     });
+  }catch(error){
+    if(error.name==='AbortError')return;
+    if(controller===suggestController)$('results').textContent='候補を取得できませんでした。手入力できます。';
+  }
+}
+function scheduleSuggestions(kind){
+  clearTimeout(suggestTimer);
+  if(suggestController)suggestController.abort();
+  const q=$(kind).value.trim();
+  $('results').innerHTML='';
+  if(q.length<2)return;
+  $('results').textContent='候補を検索中…';
+  suggestTimer=setTimeout(()=>searchSuggestions(kind,q),700);
+}
+$('title').addEventListener('input',()=>scheduleSuggestions('title'));
+$('artist').addEventListener('input',()=>scheduleSuggestions('artist'));
+$('title').addEventListener('keydown',e=>{if(e.key==='Escape')clearSuggestions()});
+$('artist').addEventListener('keydown',e=>{if(e.key==='Escape')clearSuggestions()});
+document.addEventListener('click',e=>{if(!$('results').contains(e.target)&&e.target!==$('title')&&e.target!==$('artist'))clearSuggestions()});
+
+/* ===== 記録 ===== */
+$('save').onclick=()=>{
+  const title=$('title').value.trim(),artist=$('artist').value.trim();
+  if(!title&&!artist){alert('曲名かアーティスト名を入力してください');return}
+  const d=$('date').value||today();
+  const t=$('hasTime').checked?($('time').value||nowTime()):'';
+  const item={id:editing||(crypto.randomUUID?crypto.randomUUID():String(Date.now())),date:d,time:t,title,artist,memo:$('memo').value.trim()};
+  if(editing)state.records=state.records.map(x=>x.id===editing?item:x);else state.records.push(item);
+  sortRecords(state.records);save();reset();
+};
+$('cancel').onclick=reset;
+function render(){
+  const records=state.records;
+  $('count').textContent=records.length+'件';
+  const list=$('list');
+  if(!records.length){list.className='empty';list.textContent='まだ記録がありません。';return}
+  list.className='';
+  list.innerHTML=records.map(r=>'<article class="record"><div class="record-top"><div><time>'+esc(r.date)+(r.time?' '+esc(r.time):'')+'</time><br><strong>'+esc(r.title||'曲名未入力')+'</strong><div class="artist">'+esc(r.artist||'アーティスト未入力')+'</div></div><div class="record-actions"><button class="ghost" data-edit="'+esc(r.id)+'">編集</button><button class="danger" data-del="'+esc(r.id)+'">削除</button></div></div>'+(r.memo?'<p>'+esc(r.memo)+'</p>':'')+'</article>').join('');
+  list.querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>{const r=state.records.find(x=>x.id===b.dataset.edit);if(!r)return;editing=r.id;$('date').value=r.date||today();$('hasTime').checked=!!r.time;$('time').value=r.time||'';$('time').disabled=!r.time;$('title').value=r.title;$('artist').value=r.artist;$('memo').value=r.memo;$('save').textContent='変更を保存';$('cancel').hidden=false;$('editState').textContent='編集中';window.scrollTo({top:0,behavior:'smooth'})});
+  list.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{if(confirm('この記録を削除しますか？')){state.records=state.records.filter(x=>x.id!==b.dataset.del);if(editing===b.dataset.del)reset();save()}});
+}
+
+/* ===== 統計 ===== */
+function bars(id,items){const el=$(id);if(!items.length){el.textContent='データがありません';return}const max=Math.max(1,...items.map(i=>i[1]));el.innerHTML=items.map(([n,v])=>'<div class="bar-row"><span>'+esc(n)+'</span><div class="bar"><i style="width:'+(v/max*100)+'%"></i></div><b>'+v+'</b></div>').join('')}
+function stats(){
+  const records=state.records;
+  const artists=new Set(records.map(x=>x.artist).filter(Boolean)).size,days=new Set(records.map(x=>x.date)).size;
+  $('metrics').innerHTML='<div class="metric"><b>'+records.length+'</b><span>記録数</span></div><div class="metric"><b>'+artists+'</b><span>アーティスト数</span></div><div class="metric"><b>'+days+'</b><span>記録日数</span></div>';
+  const a={};records.forEach(r=>{if(r.artist)a[r.artist]=(a[r.artist]||0)+1});
+  bars('artists',Object.entries(a).sort((x,y)=>y[1]-x[1]).slice(0,8));
+  const h={'朝 5–10時':0,'昼 11–16時':0,'夜 17–21時':0,'深夜 22–4時':0};
+  records.forEach(r=>{if(!r.time)return;const n=Number(r.time.split(':')[0]);h[n>=5&&n<=10?'朝 5–10時':n>=11&&n<=16?'昼 11–16時':n>=17&&n<=21?'夜 17–21時':'深夜 22–4時']++});
+  bars('hours',Object.entries(h));
+  extraStats(records);
+}
+
+/* ルールベースの集計(AI不使用): メモの言葉できっかけを判定する */
+const KIKKAKE_RULES=[
+  ['会話・人',/話し|話を|話が|会話|言われ|言って|聞かれ|友達|友人|同僚|会社の人|家族|先輩|後輩|上司|彼|彼女|一緒に|さん(?:と|が|に)/],
+  ['予定・イベント',/ライブ|コンサート|フェス|公演|ツアー|発売|予定|明日|来週|今週末|当選|落選|誕生日|記念日|旅行|イベント|試合|発表会/],
+  ['動画・メディア',/youtube|ユーチューブ|動画|テレビ|tv|番組|ドラマ|アニメ|映画|cm|ラジオ|sns|tiktok|twitter|ツイッター|instagram|インスタ|ゲーム|配信|パロディ|ニュース|漫画|マンガ|本で|記事/i],
+  ['場所・景色',/駅|電車|バス|道|街|景色|夕焼け|朝焼け|空|雨|雪|風|海|山|川|公園|店|ファミレス|カフェ|コンビニ|散歩|帰り道|通勤|家で|部屋|車で|旅先|温泉/],
+  ['気分・体の状態',/疲れ|眠|ねむ|嬉し|うれし|楽し|悲し|寂し|さみし|不安|緊張|焦|イライラ|落ち着|ほっと|元気|憂鬱|しんど|懐かし|ワクワク|わくわく/]
+];
+const NO_REASON=/なんとなく|なんか|ふと|急に|突然|理由は|わからない|分からない|不明|不意に/;
+function kikkakeOf(memo){
+  const m=(memo||'').trim();
+  if(!m)return ['メモなし'];
+  const tags=KIKKAKE_RULES.filter(([,re])=>re.test(m)).map(([n])=>n);
+  if(NO_REASON.test(m)&&!tags.length)return ['なんとなく・理由不明'];
+  if(NO_REASON.test(m))tags.push('なんとなく・理由不明');
+  return tags.length?tags:['その他(メモあり)'];
+}
+function normKey(v){return String(v||'').normalize('NFKC').toLowerCase().replace(/\s+/g,'')}
+function extraStats(records){
+  const n=records.length;
+  $('kikkakeNote').textContent=n<20?'記録は'+n+'件です。少ないうちは、傾向ではなく件数の確認として見てください。':'記録は'+n+'件です。';
+  const k={};records.forEach(r=>kikkakeOf(r.memo).forEach(t=>k[t]=(k[t]||0)+1));
+  bars('kikkake',Object.entries(k).sort((a,b)=>b[1]-a[1]));
+  const wd=['日','月','火','水','木','金','土'].map(x=>[x+'曜',0]);
+  const mo={};
+  records.forEach(r=>{
+    const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(r.date);if(!m)return;
+    wd[new Date(+m[1],+m[2]-1,+m[3]).getDay()][1]++;
+    const key=(+m[2])+'月';mo[key]=(mo[key]||0)+1;
   });
+  bars('weekdays',wd);
+  bars('months',Object.entries(mo).sort((a,b)=>parseInt(a[0])-parseInt(b[0])));
+  const g={};
+  records.forEach(r=>{
+    if(!r.title)return;
+    const key=normKey(r.title)+'||'+normKey(r.artist);
+    (g[key]=g[key]||{title:r.title,artist:r.artist,dates:[]}).dates.push(r.date);
+  });
+  const reps=Object.values(g).filter(x=>x.dates.length>=2).sort((a,b)=>b.dates.length-a.dates.length);
+  $('repeats').innerHTML=reps.length?reps.map(x=>{
+    const d=x.dates.slice().sort();
+    const gaps=[];for(let i=1;i<d.length;i++)gaps.push(Math.round((new Date(d[i])-new Date(d[i-1]))/86400000));
+    return '<div class="bar-row" style="grid-template-columns:1fr"><span><b>'+esc(x.title)+'</b> '+esc(x.artist)+' / '+d.length+'回<br>'+esc(d.join(' → '))+'(間隔 '+gaps.join('・')+'日)</span></div>';
+  }).join(''):'<div class="empty">同じ曲が2回以上出た記録は、まだありません。</div>';
 }
-// 1件のクラウドの記録を、更新時刻を比べて取り込む(新しい方が勝つ)
-function applyRemoteRec(d){
-  var id=d.id,i=recIdx(id),loc=i>=0?db.records[i]:null,rAt=d.updatedAt||0;
-  if(d.deleted){
-    if(loc&&(loc.updatedAt||0)>rAt)return pushRecord(loc);
-    if(loc){db.records.splice(i,1);delete urlCache[id]}
-    db.tombs[id]=rAt;save();return photoDel(id);
-  }
-  var tomb=db.tombs[id]||0;
-  if(tomb>rAt)return pushTomb(id);
-  if(loc&&(loc.updatedAt||0)>rAt)return pushRecord(loc);
-  if(loc&&(loc.updatedAt||0)===rAt){
-    if(d.hasPhoto&&(loc.photoAt||0)<(d.photoAt||0))return downloadPhoto(loc,d);
-    return Promise.resolve();
-  }
-  var rec={id:id,dt:d.dt,date:d.date,fav:d.fav||0,comment:d.comment||'',weather:d.weather||null,items:d.items||[],confirmed:!!d.confirmed,ai:d.ai||null,hasPhoto:loc?!!loc.hasPhoto:false,photoAt:loc?loc.photoAt||0:0,syncedPhotoAt:loc?loc.syncedPhotoAt||0:0,updatedAt:rAt};
-  if(loc)db.records[i]=rec;else db.records.push(rec);
-  delete db.tombs[id];save();
-  if(d.hasPhoto&&(rec.photoAt||0)<(d.photoAt||0))return downloadPhoto(rec,d);
-  return Promise.resolve();
-}
-function applyRemoteWard(d){
-  var id=d.id,i=wIdx(id),loc=i>=0?db.wardrobe[i]:null,rAt=d.updatedAt||0;
-  if(d.deleted){
-    if(loc&&(loc.updatedAt||0)>rAt)return pushWard(loc);
-    if(loc){db.wardrobe.splice(i,1);delete wurl[id]}
-    db.wtombs[id]=rAt;save();return photoDel(id,'wphotos');
-  }
-  if((db.wtombs[id]||0)>rAt)return pushWTomb(id);
-  if(loc&&(loc.updatedAt||0)>rAt)return pushWard(loc);
-  if(loc&&(loc.updatedAt||0)===rAt)return Promise.resolve();
-  var w={id:id,name:d.name||'',cat:d.cat||'その他',color:d.color||'',brand:d.brand||'',len:d.len||'',bgDone:!!d.bgDone,price:d.price==null?null:d.price,bought:d.bought||'',sold:d.sold==null?null:d.sold,hasPhoto:!!d.photo,updatedAt:rAt};
-  if(loc)db.wardrobe[i]=w;else db.wardrobe.push(w);
-  delete db.wtombs[id];save();delete wurl[id];
-  if(!d.photo)return Promise.resolve();
-  return fetch(d.photo).then(function(q){return q.blob()}).then(function(b){return photoPut(id,b,'wphotos')});
-}
-function applyRemoteSettings(r){
-  if((r.updatedAt||0)>(db.settingsAt||0)){
-    db.settings.base=r.base||null;db.settingsAt=r.updatedAt||0;save();
-    if(!cur.id&&cur.locIsBase){cur.loc=db.settings.base?{name:db.settings.base.name,lat:db.settings.base.lat,lon:db.settings.base.lon}:null;renderLoc();refreshWx()}
-    return true;
-  }
-  if((r.updatedAt||0)<(db.settingsAt||0))pushSettings().catch(syncErr);
-  return false;
-}
-function refreshUI(){
-  renderSet();
-  if(!$('tab-hist').classList.contains('hide'))renderHist();
-  if(!$('tab-ward').classList.contains('hide')&&!$('wListView').classList.contains('hide'))renderWard();
+
+/* ===== AI分析・バックアップ ===== */
+$('make').onclick=async()=>{
+  const text='以下は私が記録した音楽ログです。\n\n【分析の観点】\n音楽の傾向や記憶・感情とのつながり\n\n記録された事実と推測を分け、少ないデータから性格や心理を断定せず、別の説明可能性も挙げてください。\n\n【記録データ】\n'+JSON.stringify(state.records.map(({date,time,title,artist,memo})=>({date,time,title,artist,memo})),null,2);
+  try{await navigator.clipboard.writeText(text);showToast('分析用テキストをコピーしました')}
+  catch{alert('コピーできませんでした。ブラウザの設定を確認してください')}
+};
+function download(name,content,type){const u=URL.createObjectURL(new Blob([content],{type})),a=document.createElement('a');a.href=u;a.download=name;a.click();URL.revokeObjectURL(u)}
+function stamp(){return today().replace(/-/g,'')}
+$('backup').onclick=()=>download('yoshinashioto-backup-'+stamp()+'.json',JSON.stringify({version:2,records:state.records},null,2),'application/json');
+$('restore').onchange=async e=>{
+  try{
+    const d=JSON.parse(await e.target.files[0].text()),arr=Array.isArray(d)?d:d.records;
+    if(!Array.isArray(arr))throw Error();
+    if(confirm(arr.length+'件を現在の記録に追加しますか？(同じIDは上書き)')){
+      const m=new Map(state.records.map(r=>[r.id,r]));
+      arr.forEach((r,i)=>m.set(String(r.id||'import-'+Date.now()+'-'+i),r));
+      state=normalize({records:[...m.entries()].map(([id,r])=>({...r,id})),updatedAt:Date.now()});
+      save();showToast('読み込みました');
+    }
+  }catch{alert('JSONの読み込みに失敗しました')}
+  e.target.value='';
+};
+$('csv').onclick=()=>{const rows=[['date','time','title','artist','memo'],...state.records.map(r=>[r.date,r.time,r.title,r.artist,r.memo])];download('yoshinashioto-'+stamp()+'.csv','﻿'+rows.map(row=>row.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\r\n'),'text/csv;charset=utf-8')};
+
+render();stats();
+
+/* ===== クラウド同期 (Firebase + Googleログイン) ===== */
+// 「とりあえず」「そろそろ」と同じFirebaseプロジェクトを使い、保存先だけ別(apps/earworm)
+const firebaseConfig = {
+  apiKey: "AIzaSyAMy7k0bx1IyOu2eBCeiOnwclYtSEfrigY",
+  authDomain: "nemui-neko-apps.firebaseapp.com",
+  projectId: "nemui-neko-apps",
+  storageBucket: "nemui-neko-apps.firebasestorage.app",
+  messagingSenderId: "433296418616",
+  appId: "1:433296418616:web:bf83c521c8355487c883cd"
+};
+let fbUser=null,fbDb=null,fbUnsub=null,syncReady=false;
+
+(function initSync(){
+  if(typeof firebase==='undefined')return;   // SDK未読込(オフライン等)→ローカルのみ
+  try{
+    firebase.initializeApp(firebaseConfig);
+    fbDb=firebase.firestore();
+    firebase.auth().getRedirectResult().catch(()=>{});
+    firebase.auth().onAuthStateChanged(onAuthChanged);
+  }catch(e){console.warn('sync init failed',e)}
+  const btn=$('syncBtn');
+  btn.style.display='inline-block';
+  btn.onclick=onSyncClick;
+  renderSyncUI();
+})();
+
+function dataDoc(){return fbDb.collection('users').doc(fbUser.uid).collection('apps').doc('earworm')}
+function onAuthChanged(user){
+  fbUser=user;syncReady=false;renderSyncUI();
+  if(fbUnsub){fbUnsub();fbUnsub=null}
+  if(user)startSync();
 }
 function startSync(){
-  fb.warned=false;
-  var firstR=true,firstW=true,seenR=null,seenW=null;
-  function firstDone(){if(seenR&&seenW&&firstR===false&&firstW===false){pushAll(seenR,seenW).catch(syncErr);seenR=seenW=null}}
-  fb.unsubS=appDoc().onSnapshot(function(s){
-    if(s.metadata.hasPendingWrites)return;
-    if(!s.exists){if(db.settings.base&&db.settingsAt)pushSettings().catch(syncErr);return}
-    if(applyRemoteSettings(s.data()))refreshUI();
-  },syncErr);
-  fb.unsubR=recCol().onSnapshot(function(snap){
-    var docs=[];
-    snap.docChanges().forEach(function(c){
-      if(c.type==='removed')return;
-      if(c.doc.metadata.hasPendingWrites)return;
-      docs.push(c.doc.data());
+  // 初回読み込みが終わるまではpushを禁止し、クラウドの既存データを誤上書きしない
+  dataDoc().get().then(snap=>{
+    const remote=snap.exists?snap.data():null;
+    const localAt=state.updatedAt||0,remoteAt=remote?(remote.updatedAt||0):-1;
+    if(remote&&remoteAt>=localAt)applyRemote(remote);
+    syncReady=true;
+    if(!remote||localAt>remoteAt)pushToCloud();
+    fbUnsub=dataDoc().onSnapshot(s=>{
+      if(!s.exists)return;
+      const r=s.data();
+      if((r.updatedAt||0)>(state.updatedAt||0))applyRemote(r);
     });
-    var wasFirst=firstR;
-    if(wasFirst){seenR={};snap.forEach(function(x){seenR[x.id]=1})}
-    Promise.all(docs.map(applyRemoteRec)).then(function(){
-      if(wasFirst){firstR=false;firstDone()}
-    }).then(function(){if(docs.length)refreshUI()}).catch(syncErr);
-  },syncErr);
-  fb.unsubA=fb.db.collection('users').doc(fb.user.uid).collection('apps').doc('outfitLogAiUsage').onSnapshot(function(s){
-    cloudAi=s.exists?s.data():{};
-    var day=localDay();
-    if(Number(cloudAi[day+'_'+deviceId()]||0)<(aiCounts()[day]||0))pushAiUsage(day); // この端末のぶんが届いていなければ送る
-    renderSet();
-  },function(e){console.warn('usage',e)});
-  fb.unsubW=wardCol().onSnapshot(function(snap){
-    var docs=[];
-    snap.docChanges().forEach(function(c){
-      if(c.type==='removed')return;
-      if(c.doc.metadata.hasPendingWrites)return;
-      docs.push(c.doc.data());
-    });
-    var wasFirst=firstW;
-    if(wasFirst){seenW={};snap.forEach(function(x){seenW[x.id]=1})}
-    Promise.all(docs.map(applyRemoteWard)).then(function(){
-      if(wasFirst){firstW=false;firstDone()}
-    }).then(function(){if(docs.length)refreshUI()}).catch(syncErr);
-  },syncErr);
+  }).catch(e=>{console.warn(e);syncReady=false;showToast('同期の読み込みに失敗。記録は端末に保存されています')});
 }
-function stopSync(){
-  if(fb.unsubR){fb.unsubR();fb.unsubR=null}
-  if(fb.unsubS){fb.unsubS();fb.unsubS=null}
-  if(fb.unsubW){fb.unsubW();fb.unsubW=null}
-  if(fb.unsubA){fb.unsubA();fb.unsubA=null}
-  cloudAi=null;
+function applyRemote(r){
+  const at=r.updatedAt||Date.now();
+  state=normalize(r);state.updatedAt=at;
+  localStorage.setItem(KEY,JSON.stringify(state));
+  render();stats();
+  showToast('同期で最新になりました');
+}
+function pushToCloud(){
+  if(!fbUser||!fbDb)return;
+  try{dataDoc().set(JSON.parse(JSON.stringify(state)))}
+  catch(e){console.warn('push failed',e)}
 }
 function renderSyncUI(){
-  var b=$('syncBtn');
-  if(fb.user){b.textContent='同期中';b.classList.add('on');b.title=(fb.user.email||'')+' / タップでログアウト'}
-  else{b.textContent='同期';b.classList.remove('on');b.title='Googleでログインして同期'}
-}
-function onAuthChanged(u){
-  fb.user=u;renderSyncUI();stopSync();
-  if(u)startSync();
+  const btn=$('syncBtn');if(!btn)return;
+  if(fbUser){btn.textContent='同期中';btn.classList.add('on');btn.title=(fbUser.email||'')+' / タップでログアウト'}
+  else{btn.textContent='同期';btn.classList.remove('on');btn.title='Googleでログインして同期'}
 }
 function onSyncClick(){
-  if(typeof firebase==='undefined'){toast('同期にはネット接続が必要です');return}
-  if(fb.user){
-    if(confirm('同期をオフにしますか？(ログアウト)\n記録はこの端末に残ります'))firebase.auth().signOut();
+  if(typeof firebase==='undefined'){showToast('同期にはネット接続が必要です');return}
+  if(fbUser){
+    if(confirm('同期をオフにしますか？（ログアウト）\n記録はこの端末に残ります'))firebase.auth().signOut();
     return;
   }
-  var prov=new firebase.auth.GoogleAuthProvider();
-  firebase.auth().signInWithPopup(prov).catch(function(err){
-    var c=err&&err.code;
-    if(c==='auth/popup-blocked'||c==='auth/cancelled-popup-request'||c==='auth/operation-not-supported-in-this-environment'||c==='auth/popup-closed-by-user'){
-      firebase.auth().signInWithRedirect(prov);
-    }else{console.warn(err);toast('ログインできませんでした')}
+  const provider=new firebase.auth.GoogleAuthProvider();
+  firebase.auth().signInWithPopup(provider).catch(err=>{
+    const code=err&&err.code;
+    if(code==='auth/popup-blocked'||code==='auth/cancelled-popup-request'||code==='auth/operation-not-supported-in-this-environment'||code==='auth/popup-closed-by-user'){
+      firebase.auth().signInWithRedirect(provider);
+    }else{console.warn(err);showToast('ログインできませんでした')}
   });
 }
-(function initSync(){
-  if(typeof firebase==='undefined')return; // SDK未読込(オフライン等)→ローカルのみ
-  try{
-    firebase.initializeApp(FBC);
-    fb.db=firebase.firestore();
-    firebase.auth().getRedirectResult().catch(function(){});
-    firebase.auth().onAuthStateChanged(onAuthChanged);
-  }catch(e){console.warn('sync init failed',e);return}
-  var b=$('syncBtn');b.classList.remove('hide');b.addEventListener('click',onSyncClick);renderSyncUI();
-})();
-})();
 </script>
 </body>
 </html>
